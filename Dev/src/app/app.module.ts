@@ -9,6 +9,7 @@ import { DoctagsComponent } from './views/doctags/doctags.component';
 import { DoctagDialogComponent } from './dialogs/doctag-dialog/doctag-dialog.component';
 import { TopicDialogComponent } from './dialogs/topic-dialog/topic-dialog.component';
 import { TopicComponent } from './views/topic/topic.component';
+import { ExamplesDialogComponent } from './dialogs/examples-dialog/examples-dialog.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,7 +25,9 @@ import { MatFormFieldModule,
          MatPaginatorModule,
          MatSortModule,
          MatDialogModule,
-         MatAutocompleteModule} from '@angular/material';
+         MatAutocompleteModule,
+         MatExpansionModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { MatFormFieldModule,
     DoctagsComponent,
     DoctagDialogComponent,
     TopicDialogComponent,
-    TopicComponent
+    TopicComponent,
+    ExamplesDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,10 +57,11 @@ import { MatFormFieldModule,
     MatDialogModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DoctagDialogComponent, TopicDialogComponent]
+  entryComponents: [DoctagDialogComponent, TopicDialogComponent, ExamplesDialogComponent]
 })
 export class AppModule { }

@@ -1,11 +1,12 @@
-import { TopicsData } from '../../models';
 import { Observable } from 'rxjs';
 import {  TopicHistories,
   DocTagVersions,
   Examples,
   Doctags,
   Topics,
-  Contributors } from '../../../../../Analysis/Models';
+  Contributors,
+  TopicsData,
+  ExamplesData} from '../models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -23,6 +24,11 @@ export class AppDataService {
 
   public addTopic(data: TopicsData) {
     const url = 'http://localhost:1337/Topics';
+    return this._http.post<any>(url, data);
+  }
+
+  public addExample(data: ExamplesData) {
+    const url = 'http://localhost:1337/Examples';
     return this._http.post<any>(url, data);
   }
 
