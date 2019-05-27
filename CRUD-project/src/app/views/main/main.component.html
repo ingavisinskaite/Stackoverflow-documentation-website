@@ -1,0 +1,77 @@
+<div fxLayout="column" fxLayoutAlign="space-around center"  >
+
+  <!-- <mat-form-field fxFlex>
+    <mat-label>Choose Doctag</mat-label>
+    <mat-select [(ngModel)]="selectedDoctagId" (ngModelChange)="showTopic($event)">
+      <mat-option *ngFor="let cell of doctagsTest | async" [value]="cell.Id"> {{ cell.Title }} </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <div class="doctags">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Choose doctag" aria-label="Doctags" matInput [formControl]="myControl"
+          [matAutocomplete]="auto">
+        <mat-autocomplete (optionSelected)="showTopic($event)" #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.Title}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+    <button mat-flat-button color="primary" (click)="showDoctagFormDialog()"><i class="material-icons">add</i></button>
+  </div>
+
+
+  <div *ngIf="selectedDoctagId">
+    <h1> {{ this.selectedTopicTitle }}</h1>
+    <button mat-stroked-button (click)="showDoctagVersions(selectedDoctagId)">Show More</button>
+    <div *ngFor="let version of docTagVersions">Version name: {{ version.Name }}, Release date:
+      {{toHumanDate(version.ReleaseDate)}}</div>
+  </div>
+
+  <mat-form-field *ngIf="selectedDoctagId" fxFlex>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" (click)="showTopicFormDialog()" *ngIf="selectedDoctagId" fxFlex><i
+    class="material-icons">add</i></button>
+
+    <table mat-table [dataSource]="topics" matSort matSortActive="Title" matSortDirection="asc" matSortDisableClear
+      class="mat-elevation-z8" [ngClass]="topics ? 'visible': 'hidden'" fxFlex>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="Title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let element"> {{ element.Title }} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="CreationDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
+        <td mat-cell *matCellDef="let element"> {{ toHumanDate(element.CreationDate) }} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="ViewCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> View Count </th>
+        <td mat-cell *matCellDef="let element"> {{ element.ViewCount }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="MoreButton">
+        <th mat-header-cell *matHeaderCellDef> More </th>
+        <td mat-cell *matCellDef="let element"> <button mat-stroked-button
+            (click)="showTopicHistories(element.Id)">More</button> </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToTopic(row.Id)"></tr>
+
+    </table>
+
+
+  <mat-paginator *ngIf="selectedDoctagId" [length]="topicsListLength" [pageSize]="topicsPageSize"
+    [pageIndex]="topicsPageIndex" [pageSizeOptions]="topicsPageSizeOptions"
+    (page)="topicsPageEvent = onTopicsPageChange($event)" fxFlex></mat-paginator>
+
+</div>
