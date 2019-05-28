@@ -68,7 +68,7 @@ export class AppDataService {
     return this._http.get<Array<Contributors>>(url).toPromise();
   }
 
-  public getTopicsCount(id: string): Promise<any> {
+  public getTopicsCount(id: number): Promise<any> {
     const url = 'http://localhost:1337/TopicsCount?id=' + id;
     return this._http.get<any>(url).toPromise();
   }

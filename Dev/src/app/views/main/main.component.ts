@@ -51,6 +51,10 @@ export class MainComponent implements AfterViewInit, OnInit {
   myControl = new FormControl();
   filteredOptions: Observable<Doctags[]>;
 
+  color = 'primary';
+  mode = 'indeterminate';
+  value = 50;
+
   constructor(private _router: Router,
               private _appDataService: AppDataService,
               private _dialog: MatDialog,
@@ -71,6 +75,9 @@ export class MainComponent implements AfterViewInit, OnInit {
           this.selectedTopicTitle = doctagTitle;
           const doctagId = this.docTags.find(x => x.Title === doctagTitle).Id;
           this.selectedDoctagId = doctagId;
+          this._appDataService.getTopicsCount(doctagId).then(data => {
+            this.topicsListLength = data[0].Count;
+          });
           this._appDataService.getTopics(doctagId, 0, this.topicsPageSize, this.topicsOrderBy, this.topicsSortDirection).then(topics => {
             this.topics = topics;
           });

@@ -16,17 +16,23 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule,
-         MatInputModule,
-         MatCardModule,
-         MatSelectModule,
-         MatButtonModule,
-         MatTableModule,
-         MatPaginatorModule,
-         MatSortModule,
-         MatDialogModule,
-         MatAutocompleteModule,
-         MatExpansionModule} from '@angular/material';
+import {
+        MatFormFieldModule,
+        MatInputModule,
+        MatCardModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatDialogModule,
+        MatAutocompleteModule,
+        MatExpansionModule,
+        MatProgressSpinnerModule
+} from '@angular/material';
+
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { ScrollEventModule } from 'ngx-scroll-event';
 
 
 @NgModule({
@@ -58,7 +64,10 @@ import { MatFormFieldModule,
     MatCardModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    ScrollToModule.forRoot(),
+    ScrollEventModule
   ],
   providers: [],
   bootstrap: [AppComponent],

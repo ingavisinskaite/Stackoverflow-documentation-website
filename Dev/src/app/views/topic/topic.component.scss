@@ -1,53 +1,72 @@
 .topicTitle {
-    text-align: center;
+  text-align: center;
 }
 
 .container {
-    max-width: 80%;
-    margin: 0 auto;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  max-width: 80%;
+  margin: 0 auto;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
 ::ng-deep .mat-expansion-panel-content {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 1.1em; 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.1em;
 }
 
 ::ng-deep .mat-expansion-panel-header-title {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
 mat-panel-title {
-    font-size: 1.3em;
-    color: white;
+  font-size: 1.3em;
+  color: white;
 }
 
 ::ng-deep .mat-expansion-panel-header {
-    background-color: #3f51b5;
+  background-color: #3f51b5;
 }
 
 mat-expansion-panel {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 
 ::ng-deep .mat-expansion-panel-header:hover,
 ::ng-deep .mat-expansion-panel-header:focus {
-    background-color: #3f51b5 !important;
+  background-color: #3f51b5 !important;
 }
 
 
 ::ng-deep .mat-raised-button {
-    margin-bottom: 20px !important;
+  margin-bottom: 20px !important;
 }
 
 ::ng-deep code {
-    white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 
 h1 {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 ::ng-deep .mat-expansion-indicator::after {
-    color: white;
+  color: white;
+}
+
+.loading {
+  max-width: 30%;
+  margin: auto;
+  margin-top: 50vh
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+}
+
+.show-scrollTop {
+  opacity: 1;
+  transition: all .2s ease-in-out;
 }

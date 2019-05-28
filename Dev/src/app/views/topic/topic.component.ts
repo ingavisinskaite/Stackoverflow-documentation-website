@@ -1,16 +1,20 @@
 import { AppDataService } from '../../services/app-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Examples } from '../../models';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { ExamplesDialogComponent } from '../../dialogs';
+import { Injectable } from '@angular/core';
+import { ScrollToService, ScrollToConfigOptions } from '@nicky-lenaers/ngx-scroll-to';
+import { ScrollEvent } from 'ngx-scroll-event';
 
 @Component({
   selector: 'app-topic',
   templateUrl: './topic.component.html',
   styleUrls: ['./topic.component.scss']
 })
+@Injectable()
 export class TopicComponent implements OnInit {
 
   examples: Array<Examples>;
@@ -19,10 +23,17 @@ export class TopicComponent implements OnInit {
   panelOpenState = false;
   firstExampleId: number;
 
+  color = 'primary';
+  mode = 'indeterminate';
+  value = 50;
+
+  windowScrolled = false;
+
   constructor(private _activatedRoute: ActivatedRoute,
-              private _appDataService: AppDataService,
-              private _dialog: MatDialog,) {
-   }
+    private _appDataService: AppDataService,
+    private _dialog: MatDialog,
+    private _scrollToService: ScrollToService) {
+  }
 
   ngOnInit() {
     this.topicId = this._activatedRoute.snapshot.params['topicId'];
@@ -60,6 +71,21 @@ export class TopicComponent implements OnInit {
           });
         }
       });
+  }
+
+  public triggerScrollTo() {
+    const config: ScrollToConfigOptions = {
+      target: 'top'
+    };
+    this._scrollToService.scrollTo(config);
+  }
+
+
+  public handleScroll(event: ScrollEvent) {
+    this.windowScrolled = true;
+    if (event.isReachingTop) {
+    this.windowScrolled = false;
+    }
   }
 
 }
