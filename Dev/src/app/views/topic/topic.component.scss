@@ -47,3 +47,7 @@ mat-expansion-panel {
 h1 {
     font-weight: normal;
 }
+
+::ng-deep .mat-expansion-indicator::after {
+    color: white;
+}
