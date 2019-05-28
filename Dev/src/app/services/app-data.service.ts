@@ -1,11 +1,12 @@
-import { TopicsData } from '../../models';
 import { Observable } from 'rxjs';
 import {  TopicHistories,
   DocTagVersions,
   Examples,
   Doctags,
   Topics,
-  Contributors } from '../../../../../Analysis/Models';
+  Contributors,
+  TopicsData,
+  ExamplesData} from '../models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -26,12 +27,17 @@ export class AppDataService {
     return this._http.post<any>(url, data);
   }
 
+  public addExample(data: ExamplesData) {
+    const url = 'http://localhost:1337/Examples';
+    return this._http.post<any>(url, data);
+  }
+
   public getDoctags(): Promise<Array<Doctags>> {
     const url = 'http://localhost:1337/Doctags';
     return this._http.get<Array<Doctags>>(url).toPromise();
   }
 
-  public getTopic(id: string): Observable<Topics> {
+  public getTopic(id: number): Observable<Topics> {
     const url = 'http://localhost:1337/Topic/' + id;
     return this._http.get<Topics>(url);
   }
@@ -42,7 +48,7 @@ export class AppDataService {
     return this._http.get<Array<Topics>>(url).toPromise();
   }
 
-  public getExamples(id: string): Promise<Array<Examples>> {
+  public getExamples(id: number): Promise<Array<Examples>> {
     const url = 'http://localhost:1337/Examples?id=' + id;
     return this._http.get<Array<Examples>>(url).toPromise();
   }

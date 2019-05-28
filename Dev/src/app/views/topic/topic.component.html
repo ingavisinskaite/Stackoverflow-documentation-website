@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 class="topicTitle">{{topicTitle}}</h1>
+  <button mat-raised-button color="warn" (click)="showExampleFormDialog()"><i class="material-icons">add</i></button>
+  <mat-accordion *ngFor="let example of examples">
+    <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="example.Id == firstExampleId" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{ example.Title }}
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div [innerHTML]="example.BodyHtml"></div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

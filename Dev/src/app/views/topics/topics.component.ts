@@ -12,7 +12,7 @@ import {
   ContributorDeletionReasons,
   Contributors
 } from '../../models';
-import { AppDataService } from '../services/app-data.service';
+import { AppDataService } from '../../services/app-data.service';
 import { PageEvent } from '@angular/material';
 
 

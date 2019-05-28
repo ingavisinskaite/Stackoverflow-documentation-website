@@ -9,10 +9,10 @@ import {
   ContributorDeletionReasons,
   Contributors
 } from '../../models';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
-import { AppDataService } from '../services/app-data.service';
+import { AppDataService } from '../../services/app-data.service';
 import { DoctagDialogComponent, TopicDialogComponent } from '../../dialogs';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -54,7 +54,8 @@ export class MainComponent implements AfterViewInit, OnInit {
   constructor(private _router: Router,
               private _appDataService: AppDataService,
               private _dialog: MatDialog,
-              private _activatedRoute: ActivatedRoute) {
+              private _activatedRoute: ActivatedRoute,
+              private _changeDetectorRef: ChangeDetectorRef) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -64,7 +65,6 @@ export class MainComponent implements AfterViewInit, OnInit {
     this._appDataService.getDoctags()
       .then(data => {
         this.docTags = data;
-        console.log(data);
 
         const doctagTitle = this._activatedRoute.snapshot.params['doctagTitle'];
         if (doctagTitle) {
@@ -128,7 +128,7 @@ export class MainComponent implements AfterViewInit, OnInit {
     this.selectedTopicTitle = this.docTags.find(x => x.Id === docTagId).Title;
     this._router.navigateByUrl(`${this.selectedTopicTitle}`);
     this._appDataService.getTopicsCount(docTagId).then(data => {
-      this.topicsListLength = data.result[0].Count;
+      this.topicsListLength = data[0].Count;
     });
 
     this._appDataService.getTopics(docTagId, 0, this.topicsPageSize, this.topicsOrderBy, this.topicsSortDirection)
@@ -202,6 +202,7 @@ export class MainComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         if (!result) { return; } else {
+          result.docTagId = this.selectedDoctagId;
           this._appDataService.addTopic(result).subscribe(data => {
             console.log('Inserted topic:');
             console.log(data);
