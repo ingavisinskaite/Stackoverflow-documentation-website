@@ -9,7 +9,8 @@
 }
 
 ::ng-deep .mat-expansion-panel-content {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.1em; 
 }
 
 ::ng-deep .mat-expansion-panel-header-title {
@@ -34,10 +35,15 @@ mat-expansion-panel {
     background-color: #3f51b5 !important;
 }
 
-::ng-deep .mat-expansion-indicator::after{
-    color: white;
-}
 
 ::ng-deep .mat-raised-button {
     margin-bottom: 20px !important;
+}
+
+::ng-deep code {
+    white-space: pre-wrap;
+}
+
+h1 {
+    font-weight: normal;
 }

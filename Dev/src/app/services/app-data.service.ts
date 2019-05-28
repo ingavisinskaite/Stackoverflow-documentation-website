@@ -37,7 +37,7 @@ export class AppDataService {
     return this._http.get<Array<Doctags>>(url).toPromise();
   }
 
-  public getTopic(id: string): Observable<Topics> {
+  public getTopic(id: number): Observable<Topics> {
     const url = 'http://localhost:1337/Topic/' + id;
     return this._http.get<Topics>(url);
   }
@@ -48,7 +48,7 @@ export class AppDataService {
     return this._http.get<Array<Topics>>(url).toPromise();
   }
 
-  public getExamples(id: string): Promise<Array<Examples>> {
+  public getExamples(id: number): Promise<Array<Examples>> {
     const url = 'http://localhost:1337/Examples?id=' + id;
     return this._http.get<Array<Examples>>(url).toPromise();
   }

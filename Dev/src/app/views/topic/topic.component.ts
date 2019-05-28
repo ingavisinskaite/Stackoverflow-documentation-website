@@ -15,6 +15,7 @@ export class TopicComponent implements OnInit {
 
   examples: Array<Examples>;
   topicTitle: string;
+  topicId: number;
   panelOpenState = false;
   firstExampleId: number;
 
@@ -24,18 +25,18 @@ export class TopicComponent implements OnInit {
    }
 
   ngOnInit() {
-    const id = this._activatedRoute.snapshot.params['topicId'];
-    this.downloadTopic(id);
-    this.downloadExamples(id);
+    this.topicId = this._activatedRoute.snapshot.params['topicId'];
+    this.downloadTopic(this.topicId);
+    this.downloadExamples(this.topicId);
   }
 
-  private downloadTopic(topicId: string): Subscription {
+  private downloadTopic(topicId: number): Subscription {
     return this._appDataService.getTopic(topicId).subscribe(topic => {
       this.topicTitle = topic.Title;
     });
   }
 
-  private async downloadExamples(topicId: string): Promise<void> {
+  private async downloadExamples(topicId: number): Promise<void> {
     return this._appDataService.getExamples(topicId)
       .then(data => {
         this.examples = data;
@@ -52,6 +53,7 @@ export class TopicComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         if (!result) { return; } else {
+          result.DocTopicId = this.topicId;
           this._appDataService.addExample(result).subscribe(data => {
             console.log('Inserted example:');
             console.log(data);
