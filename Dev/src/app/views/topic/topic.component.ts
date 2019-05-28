@@ -39,6 +39,7 @@ export class TopicComponent implements OnInit {
     this.topicId = this._activatedRoute.snapshot.params['topicId'];
     this.downloadTopic(this.topicId);
     this.downloadExamples(this.topicId);
+    window.scrollTo(0, 0);
   }
 
   private downloadTopic(topicId: number): Subscription {
