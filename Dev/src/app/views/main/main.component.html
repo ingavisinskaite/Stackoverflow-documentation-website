@@ -57,10 +57,9 @@
       <td mat-cell *matCellDef="let element"> {{ element.ViewCount }} </td>
     </ng-container>
 
-    <ng-container matColumnDef="MoreButton">
+    <ng-container matColumnDef="Actions">
       <th mat-header-cell *matHeaderCellDef> More </th>
-      <td mat-cell *matCellDef="let element"> <button mat-stroked-button
-          (click)="showTopicHistories(element.Id)">More</button> </td>
+      <td mat-cell *matCellDef="let element"> </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -46,7 +46,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   topicsSortDirection = 'ASC';
 
   topicsDataSource: MatTableDataSource<Topics[]>;
-  displayedColumns: string[] = ['Title', 'CreationDate', 'ViewCount', 'MoreButton'];
+  displayedColumns: string[] = ['Title', 'CreationDate', 'ViewCount', 'Actions'];
 
   myControl = new FormControl();
   filteredOptions: Observable<Doctags[]>;
@@ -156,23 +156,6 @@ export class MainComponent implements AfterViewInit, OnInit {
     this._appDataService.getDoctagVersions(event)
       .then(data => {
         this.docTagVersions = data;
-      });
-  }
-
-  public showTopicHistories(id: string): void {
-    this._appDataService.getTopicHistories(id)
-      .then(data => {
-        console.log(data);
-        let topicHistories = 'TOPIC HISTORIES \n\n';
-        data.forEach(x => {
-          if (!x.Text) {
-            topicHistories += 'Text missing \n';
-          } else {
-            const changeText = x.Text.length > 100 ? x.Text.substring(0, 100) + ' ...' : x.Text;
-            topicHistories += `${x.Name}: ${changeText}\n`;
-          }
-        });
-        alert(topicHistories);
       });
   }
 

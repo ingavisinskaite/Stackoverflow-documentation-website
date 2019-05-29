@@ -28,7 +28,8 @@ import {
         MatDialogModule,
         MatAutocompleteModule,
         MatExpansionModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatTabsModule
 } from '@angular/material';
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
@@ -67,7 +68,8 @@ import { ScrollEventModule } from 'ngx-scroll-event';
     MatExpansionModule,
     MatProgressSpinnerModule,
     ScrollToModule.forRoot(),
-    ScrollEventModule
+    ScrollEventModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

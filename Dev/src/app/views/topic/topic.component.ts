@@ -1,6 +1,6 @@
 import { AppDataService } from '../../services/app-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Examples } from '../../models';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
@@ -22,6 +22,7 @@ export class TopicComponent implements OnInit {
   topicId: number;
   panelOpenState = false;
   firstExampleId: number;
+  topicHistories: string;
 
   color = 'primary';
   mode = 'indeterminate';
@@ -85,8 +86,28 @@ export class TopicComponent implements OnInit {
   public handleScroll(event: ScrollEvent) {
     this.windowScrolled = true;
     if (event.isReachingTop) {
-    this.windowScrolled = false;
+      this.windowScrolled = false;
     }
+  }
+
+  public showTopicHistories(id: number): void {
+    this._appDataService.getTopicHistories(id)
+      .then(data => {
+        console.log(data);
+        this.topicHistories = '';
+        data.forEach(x => {
+          if (!x.Text) {
+            this.topicHistories += '';
+          } else {
+            this.topicHistories += `${x.Name}: ${x.Text}`;
+          }
+        });
+        return this.topicHistories;
+      });
+  }
+
+  getHistory() {
+    this.showTopicHistories(this.topicId);
   }
 
 }

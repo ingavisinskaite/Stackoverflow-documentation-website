@@ -58,7 +58,7 @@ export class AppDataService {
     return this._http.get<Array<DocTagVersions>>(url).toPromise();
   }
 
-  public getTopicHistories(id: string): Promise<Array<TopicHistories>> {
+  public getTopicHistories(id: number): Promise<Array<TopicHistories>> {
     const url = 'http://localhost:1337/TopicHistories?id=' + id;
     return this._http.get<Array<TopicHistories>>(url).toPromise();
   }
