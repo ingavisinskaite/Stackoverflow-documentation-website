@@ -1,140 +1,74 @@
-<div fxLayout="column" fxLayoutAlign="space-around center">
+<div fxLayout="column" fxLayoutAlign="space-around center"  >
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <ng-template #loading>
-    <mat-progress-spinner class="loading" [color]="color" [mode]="mode" [value]="value">
-    </mat-progress-spinner>
-  </ng-template>
-
-=======
-  <!-- <mat-form-field fxFlex>
-    <mat-label>Choose Doctag</mat-label>
-    <mat-select [(ngModel)]="selectedDoctagId" (ngModelChange)="showTopic($event)">
-      <mat-option *ngFor="let cell of doctagsTest | async" [value]="cell.Id"> {{ cell.Title }} </mat-option>
-    </mat-select>
-  </mat-form-field> -->
->>>>>>> d978c1b4bd747faa3c8899cfb6b34681adc94e67
-  <div class="doctags">
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <input type="text" placeholder="Choose doctag" aria-label="Doctags" matInput [formControl]="myControl"
-=======
-  <div class="search-bar-wraper" fxLayout="row" fxLayoutAlign="space-between center" >
-    <form class="example-form" fxFlex>
-      <mat-form-field class="example-full-width" appearance="outline">
-          <span matPrefix><i class="material-icons">search</i></span>
-        <input type="text" placeholder="Search for Topics" aria-label="Doctags" matInput [formControl]="myControl"
->>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
-          [matAutocomplete]="auto">
-        <mat-autocomplete (optionSelected)="showTopic($event)" #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option.Title}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
-    <button class="add-doctag-button" mat-flat-button color="primary" (click)="showDoctagFormDialog()" fxFlex><i class="material-icons">add</i>Add Doctag</button>
-  </div>
-
-<<<<<<< HEAD
-  <div *ngIf="selectedDoctagId">
-    <div *ngIf="topics else loading">
-      <h1> {{ this.selectedTopicTitle }}</h1>
-      <button mat-stroked-button (click)="showDoctagVersions(selectedDoctagId)">Show More</button>
-      <div *ngFor="let version of docTagVersions">Version name: {{ version.Name }}, Release date:
-        {{toHumanDate(version.ReleaseDate)}}</div>
+    <div class="search-bar-wraper" fxLayout="row" fxLayoutAlign="space-between center" >
+      <form class="example-form" fxFlex>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <span matPrefix><i class="material-icons">search</i></span>
+          <input type="text" placeholder="Search for Topics" aria-label="Doctags" matInput [formControl]="myControl"
+            [matAutocomplete]="auto">
+          <mat-autocomplete (optionSelected)="showTopic($event)" #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option.Title}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      <button class="add-doctag-button" mat-flat-button color="primary" (click)="showDoctagFormDialog()" fxFlex><i class="material-icons">add</i>Add Doctag</button>
     </div>
-=======
-  <div class="hero-text" *ngIf="!selectedDoctagId">
-    <h1>Welcome to DUMP Admin Panel</h1>
-    <p>Search, edit, and add to the biggest documentation library in the world!<br><br>
-      Future of programming on this planet depends on you my friend. Generations 
-      of newbies will be forever grateful and praise your name.</p>
+  
+    <div class="hero-text" *ngIf="!selectedDoctagId">
+      <h1>Welcome to DUMP Admin Panel</h1>
+      <p>Search, edit, and add to the biggest documentation library in the world!<br><br>
+        Future of programming on this planet depends on you my friend. Generations 
+        of newbies will be forever grateful and praise your name.</p>
+    </div>
+    <div class="hero-image" *ngIf="!selectedDoctagId">
+      <img src="../../../assets/power.svg" alt="">
+    </div>
+  
+    <div class="show-doctags-wraper" *ngIf="selectedDoctagId" fxLayout="row" fxLayoutAlign="space-between stretch">
+      <h1 fxFlex> {{ this.selectedTopicTitle }} </h1>
+      <button mat-stroked-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
+      <button mat-stroked-button (click)="showTopicFormDialog()" fxFlex>Add Topic</button>
+    </div>
+  
+    <!-- <mat-form-field class="filter-form" *ngIf="selectedDoctagId" fxFlex>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field> -->
+  
+    <div class="table-wrap" fxLayout="column" fxLayoutAlign=" stretch">
+      
+      <table mat-table [dataSource]="topics" matSort matSortActive="Title" matSortDirection="asc" matSortDisableClear
+        class="mat-elevation-z8" [ngClass]="topics ? 'visible': 'hidden'" fxFlex>
+  
+        <ng-container matColumnDef="Title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+          <td mat-cell *matCellDef="let element"> {{ element.Title }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="CreationDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
+          <td mat-cell *matCellDef="let element"> {{ toHumanDate(element.CreationDate) }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="ViewCount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> View Count </th>
+          <td mat-cell *matCellDef="let element"> {{ element.ViewCount }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Actions">
+          <th mat-header-cell *matHeaderCellDef> More </th>
+          <td mat-cell *matCellDef="let element"> </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToTopic(row.Id)"></tr>
+  
+      </table>
+  
+      <mat-paginator *ngIf="selectedDoctagId" [length]="topicsListLength" [pageSize]="topicsPageSize"
+        [pageIndex]="topicsPageIndex" [pageSizeOptions]="topicsPageSizeOptions"
+        (page)="topicsPageEvent = onTopicsPageChange($event)" fxFlex></mat-paginator>
+    </div>
+  
   </div>
-  <div class="hero-image" *ngIf="!selectedDoctagId">
-    <img src="../../../assets/power.svg" alt="">
-  </div>
-
-  <div class="show-doctags-wraper" *ngIf="selectedDoctagId" fxLayout="row" fxLayoutAlign="space-between stretch">
-    <h1 fxFlex> {{ this.selectedTopicTitle }} </h1>
-    <button mat-stroked-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
-    <button mat-stroked-button (click)="showTopicFormDialog()" fxFlex>Add Topic</button>
->>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
-  </div>
-
-  <!-- <mat-form-field class="filter-form" *ngIf="selectedDoctagId" fxFlex>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-<<<<<<< HEAD
-  </mat-form-field>
-
-  <button mat-flat-button color="primary" (click)="showTopicFormDialog()" *ngIf="selectedDoctagId" fxFlex><i
-      class="material-icons">add</i></button>
-
-  <table mat-table [dataSource]="topics" matSort matSortActive="Title" matSortDirection="asc" matSortDisableClear
-    class="mat-elevation-z8" [ngClass]="topics ? 'visible': 'hidden'" fxFlex>
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="Title">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
-      <td mat-cell *matCellDef="let element"> {{ element.Title }} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="CreationDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
-      <td mat-cell *matCellDef="let element"> {{ toHumanDate(element.CreationDate) }} </td>
-    </ng-container>
-=======
-  </mat-form-field> -->
-
-  <div class="table-wrap" fxLayout="column" fxLayoutAlign=" stretch">
-    
-    <table mat-table [dataSource]="topics" matSort matSortActive="Title" matSortDirection="asc" matSortDisableClear
-      class="mat-elevation-z8" [ngClass]="topics ? 'visible': 'hidden'" fxFlex>
-
-      <ng-container matColumnDef="Title">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
-        <td mat-cell *matCellDef="let element"> {{ element.Title }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="CreationDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
-        <td mat-cell *matCellDef="let element"> {{ toHumanDate(element.CreationDate) }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="ViewCount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> View Count </th>
-        <td mat-cell *matCellDef="let element"> {{ element.ViewCount }} </td>
-      </ng-container>
->>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="ViewCount">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> View Count </th>
-      <td mat-cell *matCellDef="let element"> {{ element.ViewCount }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Actions">
-      <th mat-header-cell *matHeaderCellDef> More </th>
-      <td mat-cell *matCellDef="let element"> </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToTopic(row.Id)"></tr>
-
-<<<<<<< HEAD
-  </table>
-
-  <mat-paginator *ngIf="selectedDoctagId" [length]="topicsListLength" [pageSize]="topicsPageSize"
-    [pageIndex]="topicsPageIndex" [pageSizeOptions]="topicsPageSizeOptions"
-    (page)="topicsPageEvent = onTopicsPageChange($event)" fxFlex>
-  </mat-paginator>
-=======
-    <mat-paginator *ngIf="selectedDoctagId" [length]="topicsListLength" [pageSize]="topicsPageSize"
-      [pageIndex]="topicsPageIndex" [pageSizeOptions]="topicsPageSizeOptions"
-      (page)="topicsPageEvent = onTopicsPageChange($event)" fxFlex></mat-paginator>
-  </div>
->>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
-
-</div>

@@ -4,8 +4,9 @@ import {  TopicHistories,
   Examples,
   Doctags,
   Topics,
+  Contributors,
   TopicsData,
-  Contributors } from '../models';
+  ExamplesData} from '../models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -23,6 +24,11 @@ export class AppDataService {
 
   public addTopic(data: TopicsData) {
     const url = 'http://localhost:1337/Topics';
+    return this._http.post<any>(url, data);
+  }
+
+  public addExample(data: ExamplesData) {
+    const url = 'http://localhost:1337/Examples';
     return this._http.post<any>(url, data);
   }
 
@@ -62,7 +68,7 @@ export class AppDataService {
     return this._http.get<Array<Contributors>>(url).toPromise();
   }
 
-  public getTopicsCount(id: number): Promise<any> {
+  public getTopicsCount(id: string | number): Promise<any> {
     const url = 'http://localhost:1337/TopicsCount?id=' + id;
     return this._http.get<any>(url).toPromise();
   }
