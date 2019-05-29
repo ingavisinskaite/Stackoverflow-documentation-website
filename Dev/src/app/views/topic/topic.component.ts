@@ -3,14 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Examples } from '../../models';
 import { Subscription } from 'rxjs';
-<<<<<<< HEAD
 import { MatDialog } from '@angular/material';
 import { ExamplesDialogComponent } from '../../dialogs';
 import { Injectable } from '@angular/core';
 import { ScrollToService, ScrollToConfigOptions } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEvent } from 'ngx-scroll-event';
-=======
->>>>>>> d978c1b4bd747faa3c8899cfb6b34681adc94e67
 
 @Component({
   selector: 'app-topic',
@@ -22,7 +19,6 @@ export class TopicComponent implements OnInit {
 
   examples: Array<Examples>;
   topicTitle: string;
-<<<<<<< HEAD
   topicId: number;
   panelOpenState = false;
   firstExampleId: number;
@@ -45,26 +41,15 @@ export class TopicComponent implements OnInit {
     this.downloadTopic(this.topicId);
     this.downloadExamples(this.topicId);
     window.scrollTo(0, 0);
-=======
-
-  constructor(private _activatedRoute: ActivatedRoute,
-              private _appDataService: AppDataService) {
-   }
-
-  ngOnInit() {
-    const id = this._activatedRoute.snapshot.params['topicId'];
-    this.downloadTopic(id);
-    this.downloadExamples(id);
->>>>>>> d978c1b4bd747faa3c8899cfb6b34681adc94e67
   }
 
-  private downloadTopic(topicId: string): Subscription {
+  private downloadTopic(topicId: number): Subscription {
     return this._appDataService.getTopic(topicId).subscribe(topic => {
       this.topicTitle = topic.Title;
     });
   }
 
-  private async downloadExamples(topicId: string): Promise<void> {
+  private async downloadExamples(topicId: number): Promise<void> {
     return this._appDataService.getExamples(topicId)
       .then(data => {
         this.examples = data;
@@ -72,7 +57,6 @@ export class TopicComponent implements OnInit {
       });
   }
 
-<<<<<<< HEAD
   public showExampleFormDialog() {
     const dialogRef = this._dialog.open(ExamplesDialogComponent, {
       data: { name: 'test', animal: 'dog' }
@@ -125,6 +109,4 @@ export class TopicComponent implements OnInit {
     this.showTopicHistories(this.topicId);
   }
 
-=======
->>>>>>> d978c1b4bd747faa3c8899cfb6b34681adc94e67
 }

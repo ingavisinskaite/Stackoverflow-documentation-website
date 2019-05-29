@@ -37,7 +37,6 @@
     padding-bottom: 24px;
 }
 
-<<<<<<< HEAD
 ::ng-deep .mat-form-field-wrapper{
     margin-left: 20px;
     margin-top: 20px;
@@ -45,7 +44,6 @@
 
 ::ng-deep .ng-star-inserted {
     margin-left: 20px;
-=======
 .table-wrap {
     width: 65vw;
 }
@@ -59,7 +57,6 @@
 // Table width;
 .mat-elevation-z8 {
     width: 100%;
->>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
 }
 
 // Table revealed/hidden with this class instead "ngIf";
@@ -75,15 +72,12 @@ tr {
     background-color: grey;
 }
 
-<<<<<<< HEAD
 .loading {
     max-width: 30%;
 }
-=======
-// .mat-flat-button {
-//     margin-left: 20px;
-//     height: 50px;
-//     margin-top: 20px;
-// }
 
->>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
+.mat-flat-button {
+    margin-left: 20px;
+    height: 50px;
+    margin-top: 20px;
+}}
