@@ -1,10 +1,19 @@
 <div fxLayout="column" fxLayoutAlign="space-around center">
 
+<<<<<<< HEAD
   <ng-template #loading>
     <mat-progress-spinner class="loading" [color]="color" [mode]="mode" [value]="value">
     </mat-progress-spinner>
   </ng-template>
 
+=======
+  <!-- <mat-form-field fxFlex>
+    <mat-label>Choose Doctag</mat-label>
+    <mat-select [(ngModel)]="selectedDoctagId" (ngModelChange)="showTopic($event)">
+      <mat-option *ngFor="let cell of doctagsTest | async" [value]="cell.Id"> {{ cell.Title }} </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+>>>>>>> d978c1b4bd747faa3c8899cfb6b34681adc94e67
   <div class="doctags">
     <form class="example-form">
       <mat-form-field class="example-full-width">

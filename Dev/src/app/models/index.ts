@@ -1,5 +1,4 @@
-import { ExamplesData } from './examplesData.model';
-import { TopicsData } from './../Models/topicsData.model';
+import { TopicsData } from './../models/topicsData.model';
 import { TopicHistoryTypes } from './Topichistorytypes.model';
 import { Doctags } from './doctags.model';
 import { Contributors } from './contributors.model';
@@ -21,6 +20,5 @@ export {
     ContributorDeletionReasons,
     DocTagVersions,
     Examples,
-    TopicsData,
-    ExamplesData
+    TopicsData
 };

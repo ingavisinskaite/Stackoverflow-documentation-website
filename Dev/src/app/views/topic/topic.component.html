@@ -1,3 +1,4 @@
+<<<<<<< HEAD
   <ng-template #loading>
     <mat-progress-spinner class="loading" [color]="color" [mode]="mode" [value]="value">
     </mat-progress-spinner>
@@ -38,3 +39,27 @@
       keyboard_arrow_up
     </i>
   </button>
+=======
+<div>
+  <h1 class="topicTitle">{{topicTitle}}</h1>
+
+  <div *ngIf="examples">
+    <div *ngFor="let example of examples">
+      <h2 class="topicsData">{{ example.Title }}</h2>
+      <div [innerHTML]="example.BodyHtml"></div>
+      <div *ngFor="let contributor of example.Contributors">
+        <span>
+          Contributor's Id: {{ contributor.Id }},
+        </span>
+        <span *ngIf="contributor.Type">
+          Type: {{ contributor.Type }}
+        </span>
+        <span *ngIf="contributor.DeletionReason">
+         , DeletionReason: {{contributor.DeletionReason }}
+        </span> 
+      </div>
+    </div>
+  </div>
+</div>
+
+>>>>>>> d978c1b4bd747faa3c8899cfb6b34681adc94e67
