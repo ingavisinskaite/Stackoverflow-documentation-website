@@ -6,11 +6,17 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './views/main/main.component';
 import { TopicsComponent } from './views/topics/topics.component';
 import { DoctagsComponent } from './views/doctags/doctags.component';
-import { DoctagDialogComponent } from './dialogs/doctag-dialog/doctag-dialog.component';
-import { TopicDialogComponent } from './dialogs/topic-dialog/topic-dialog.component';
 import { TopicComponent } from './views/topic/topic.component';
+<<<<<<< HEAD
 import { ExamplesDialogComponent } from './dialogs/examples-dialog/examples-dialog.component';
 import { LogoComponent } from './views/logo/logo.component';
+=======
+
+import { ExamplesDialogComponent,
+         TopicDialogComponent,
+         DoctagDialogComponent,
+         DoctagVersionsDialogComponent } from './dialogs';
+>>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -59,8 +65,13 @@ import { MatFormFieldModule,
     DoctagDialogComponent,
     TopicDialogComponent,
     TopicComponent,
+<<<<<<< HEAD
     ExamplesDialogComponent
     LogoComponent
+=======
+    ExamplesDialogComponent,
+    DoctagVersionsDialogComponent
+>>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
   ],
   imports: [
     BrowserModule,
@@ -92,7 +103,11 @@ import { MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+<<<<<<< HEAD
   entryComponents: [DoctagDialogComponent, TopicDialogComponent, ExamplesDialogComponent]
   entryComponents: [DoctagDialogComponent, TopicDialogComponent]
+=======
+  entryComponents: [DoctagDialogComponent, TopicDialogComponent, ExamplesDialogComponent, DoctagVersionsDialogComponent]
+>>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
 })
 export class AppModule { }

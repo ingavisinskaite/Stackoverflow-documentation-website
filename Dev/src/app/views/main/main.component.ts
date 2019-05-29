@@ -13,7 +13,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { AppDataService } from '../../services/app-data.service';
-import { DoctagDialogComponent, TopicDialogComponent } from '../../dialogs';
+import { DoctagDialogComponent, TopicDialogComponent, DoctagVersionsDialogComponent } from '../../dialogs';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -152,11 +152,15 @@ export class MainComponent implements AfterViewInit, OnInit {
     this._router.navigateByUrl(`${this.selectedTopicTitle}/${topicId}`);
   }
 
-  public showDoctagVersions(event: any): void {
-    this._appDataService.getDoctagVersions(event)
-      .then(data => {
-        this.docTagVersions = data;
-      });
+  // public showDoctagVersions(event: any): void {
+  //   this._appDataService.getDoctagVersions(event)
+  //     .then(data => {
+  //       this.docTagVersions = data;
+  //     });
+  // }
+
+  public showDoctagVersions(event: any): Promise<DocTagVersions[]> {
+    return this._appDataService.getDoctagVersions(event);
   }
 
   public showContributors(DocExampleId: number): void {
@@ -198,6 +202,10 @@ export class MainComponent implements AfterViewInit, OnInit {
           });
         }
       });
+  }
+
+  public openDoctagversionsDialog(event: string) {
+    this._dialog.open(DoctagVersionsDialogComponent, {data: event});
   }
 
   public toHumanDate(date: string): Date {

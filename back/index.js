@@ -6,6 +6,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 
 var databaseCredentials = {
+<<<<<<< HEAD
   // host: 'localhost',
   // port: '8889',
   // user: 'crud',
@@ -17,6 +18,13 @@ var databaseCredentials = {
   password: 'r2OIAlZyGZ',
   database: 'EplOdXLoIn',
   charset: 'utf8mb4_unicode_ci'
+=======
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'crudapp',
+  charset: "utf8mb4_unicode_ci"
+>>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
 }
 
 app.use(cors({
@@ -155,7 +163,11 @@ app.get('/TopicHistories', function (req, res) {
 
     con.query('SELECT th.Text, tht.Name ' +
       'FROM topichistories th ' +
+<<<<<<< HEAD
       'JOIN topichistorytypes tht ON th.DocTopicHistoryTypeId = tht.Id ' +
+=======
+      'JOIN topichistoriestypes tht ON th.DocTopicHistoryTypeId = tht.Id ' +
+>>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
       'WHERE th.DocTopicId = ' + id,
       function (err, result, fields) {
         if (err) throw err;
@@ -185,6 +197,8 @@ app.get('/Contributors', function (req, res) {
       'FROM contributors c ' +
       'LEFT JOIN contributorTypes ct ON c.DocContributorTypeId = ct.Id ' +
       'LEFT JOIN contributorDeletionReasons cdr ON c.DocContributorDeletionReasonId = cdr.Id ' +
+      'LEFT JOIN contributortypes ct ON c.DocContributorTypeId = ct.Id ' +
+      'LEFT JOIN contributiondeletionreasons cdr ON c.DocContributorDeletionReasonId = cdr.Id ' +
       'WHERE c.DocExampleId = ' + DocExampleId,
       function (err, result, fields) {
         if (err) throw err;
