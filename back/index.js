@@ -23,8 +23,12 @@ var databaseCredentials = {
   user: 'root',
   password: '',
   database: 'crudapp',
+<<<<<<< HEAD
   charset: "utf8mb4_unicode_ci"
 >>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
+=======
+  charset: 'utf8mb4_unicode_ci'
+>>>>>>> c50e964765671d0ef88408fe5319ba9e969fea9c
 }
 
 app.use(cors({
@@ -164,10 +168,14 @@ app.get('/TopicHistories', function (req, res) {
     con.query('SELECT th.Text, tht.Name ' +
       'FROM topichistories th ' +
 <<<<<<< HEAD
+<<<<<<< HEAD
       'JOIN topichistorytypes tht ON th.DocTopicHistoryTypeId = tht.Id ' +
 =======
       'JOIN topichistoriestypes tht ON th.DocTopicHistoryTypeId = tht.Id ' +
 >>>>>>> b13dd6178ee22ecc280da4e98aa3d4a4049e4c64
+=======
+      'JOIN topichistoriestypes tht ON th.DocTopicHistoryTypeId = tht.Id ' +
+>>>>>>> c50e964765671d0ef88408fe5319ba9e969fea9c
       'WHERE th.DocTopicId = ' + id,
       function (err, result, fields) {
         if (err) throw err;
@@ -195,10 +203,15 @@ app.get('/Contributors', function (req, res) {
 
     con.query('SELECT c.Id, ct.Name AS "Type", cdr.Name AS "DeletionReason"' +
       'FROM contributors c ' +
+<<<<<<< HEAD
       'LEFT JOIN contributorTypes ct ON c.DocContributorTypeId = ct.Id ' +
       'LEFT JOIN contributorDeletionReasons cdr ON c.DocContributorDeletionReasonId = cdr.Id ' +
       'LEFT JOIN contributortypes ct ON c.DocContributorTypeId = ct.Id ' +
       'LEFT JOIN contributiondeletionreasons cdr ON c.DocContributorDeletionReasonId = cdr.Id ' +
+=======
+      'LEFT JOIN contributortypes ct ON c.DocContributorTypeId = ct.Id ' +
+      'LEFT JOIN contributordeletionreasons cdr ON c.DocContributorDeletionReasonId = cdr.Id ' +
+>>>>>>> c50e964765671d0ef88408fe5319ba9e969fea9c
       'WHERE c.DocExampleId = ' + DocExampleId,
       function (err, result, fields) {
         if (err) throw err;

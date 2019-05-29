@@ -39,4 +39,7 @@ export class ExamplesDialogComponent implements OnInit {
   onNoExampleFormClick(): void {
     this.dialogRef.close(this.examplesForm.value);
   }
+  closeExampleDial() {
+    this.dialogRef.close();
+  }
 }

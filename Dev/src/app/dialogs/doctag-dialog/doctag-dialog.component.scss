@@ -18,3 +18,20 @@ form {
 .mat-input-container {
   margin-bottom: .5em;
 }
+#close1{
+  float: right;
+  cursor: pointer;
+}
+#close1:hover{
+  background-color: black;
+  color: white;
+  border-radius: 12px;
+  opacity: 0.3;
+}
+::ng-deep .mat-dialog-container{
+  padding: 0;
+}
+ .mat-card{
+  width: 35vw;
+  height: 255px;
+}

@@ -43,6 +43,9 @@ export class TopicDialogComponent implements OnInit {
   onNoTopicFormClick(): void {
     this.dialogRef.close(this.topicForm.value);
   }
+  closeTopicDial() {
+    this.dialogRef.close();
+  }
 
 }
 

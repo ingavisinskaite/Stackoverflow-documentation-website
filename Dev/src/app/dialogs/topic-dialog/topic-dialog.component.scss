@@ -18,3 +18,23 @@ form {
 .mat-input-container {
   margin-bottom: .5em;
 }
+#close3{
+  float: right;
+  cursor: pointer;
+}
+#close3:hover{
+  background-color: black;
+  color: white;
+  border-radius: 12px;
+  opacity: 0.3;
+}
+::ng-deep .mat-dialog-container{
+  padding: 0;
+}
+.mat-card{
+  height: 95vh;
+  overflow: hidden;
+}
+::ng-deep .mat-form-field-infix{
+  border-top: 0.4075em solid transparent;
+}

@@ -1,4 +1,7 @@
 <mat-card>
+    <i class="material-icons" id="close2" (click)="closeExampleDial()">
+        close
+        </i>
     <mat-card-title>Add Example</mat-card-title>
     <mat-card-content>
       <form [formGroup]="examplesForm">
@@ -17,7 +20,7 @@
       </form>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-raised-button class="btn"(click)="submitExample()">Submit</button>
+      <button [disabled]="examplesForm.invalid" mat-raised-button class="btn"(click)="submitExample()" color="primary">Submit</button>
     </mat-card-actions>
   </mat-card>
   
