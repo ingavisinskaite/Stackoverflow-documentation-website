@@ -212,6 +212,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   }
 
   public toHumanDate(date: string): Date {
+    if (!date) { return; }
     const partOne = date.split('(')[1];
     const partTwo = Number(partOne.split('-')[0]);
     const dateObj = new Date(partTwo);

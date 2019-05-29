@@ -37,5 +37,7 @@ export class DoctagDialogComponent implements OnInit {
   onNoDoctagFormClick(): void {
     this.dialogRef.close(this.doctagForm.value);
   }
-
+  closeDocDial() {
+    this.dialogRef.close();
+  }
 }

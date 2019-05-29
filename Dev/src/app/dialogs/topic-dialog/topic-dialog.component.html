@@ -1,5 +1,8 @@
 <mat-card>
-  <mat-card-title>Add Topic</mat-card-title>
+    <i class="material-icons" id="close3" (click)="closeTopicDial()">
+        close
+        </i>
+  <mat-card-title>Add Topic  </mat-card-title>
   <mat-card-content>
     <form [formGroup]="topicForm">
       <mat-form-field>
@@ -41,7 +44,7 @@
     </form>
   </mat-card-content>
   <mat-card-actions align="end">
-    <button mat-raised-button class="btn"(click)="submitTopic()">Submit</button>
+    <button [disabled]="topicForm.invalid" mat-raised-button class="btn"(click)="submitTopic()" color="primary">Submit</button>
   </mat-card-actions>
 </mat-card>
 
