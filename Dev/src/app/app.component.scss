@@ -1,0 +1,12 @@
+router-outlet {
+    min-height: calc(100vh - 70px);
+}
+footer {
+    background-color: #242729;
+    height: 100px;
+    margin: auto;
+    color: white;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+}
