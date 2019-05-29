@@ -9,7 +9,7 @@ import {
   ContributorDeletionReasons,
   Contributors
 } from '../../models';
-import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { AppDataService } from '../../services/app-data.service';
@@ -54,8 +54,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   constructor(private _router: Router,
               private _appDataService: AppDataService,
               private _dialog: MatDialog,
-              private _activatedRoute: ActivatedRoute,
-              private _changeDetectorRef: ChangeDetectorRef) {
+              private _activatedRoute: ActivatedRoute) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -65,6 +64,7 @@ export class MainComponent implements AfterViewInit, OnInit {
     this._appDataService.getDoctags()
       .then(data => {
         this.docTags = data;
+        console.log(data);
 
         const doctagTitle = this._activatedRoute.snapshot.params['doctagTitle'];
         if (doctagTitle) {
@@ -202,7 +202,6 @@ export class MainComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         if (!result) { return; } else {
-          result.docTagId = this.selectedDoctagId;
           this._appDataService.addTopic(result).subscribe(data => {
             console.log('Inserted topic:');
             console.log(data);

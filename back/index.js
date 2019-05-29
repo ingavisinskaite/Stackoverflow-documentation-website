@@ -6,16 +6,21 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 
 var databaseCredentials = {
-  host: 'localhost',
-  port: '3307',
-  user: 'root',
-  password: 'password',
-  database: 'crud-cb',
+  // host: 'localhost',
+  // port: '8889',
+  // user: 'crud',
+  // password: 'root',
+  // database: 'crud',
+  // charset: 'utf8mb4_unicode_ci'
+  host: 'remotemysql.com',
+  user: 'EplOdXLoIn',
+  password: 'r2OIAlZyGZ',
+  database: 'EplOdXLoIn',
   charset: 'utf8mb4_unicode_ci'
 }
 
 app.use(cors({
-  origin: 'http://localhost:4200'
+  origin: 'http://localhost:4008'
 }));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({
@@ -94,27 +99,6 @@ app.get('/Topics', (req, res) => {
   });
 });
 
-app.get('/Topic/:id', (req, res) => {
-  var con = mysql.createConnection(databaseCredentials);
-
-  con.connect(function (err) {
-    if (err) throw err;
-    console.log('Connected!');
-
-    const id = Number(req.params.id);
-    console.log(id);
-
-    con.query("SELECT Title FROM topics WHERE Id = " + id + " ", function (err, result, fields) {
-      if (err) throw err;
-
-      res.json(result[0]);
-    });
-
-    con.end();
-  })
-
-})
-
 app.get('/Examples', (req, res) => {
   var con = mysql.createConnection(databaseCredentials);
 
@@ -147,7 +131,7 @@ app.get('/DoctagVersions', function (req, res) {
 
     let urlParams = url.parse(req.url, true).query;
     const id = Number(urlParams.id);
-    con.query("SELECT * FROM docTagVersions WHERE DocTagId = " + id, function (err, result, fields) {
+    con.query("SELECT * FROM doctagversions WHERE DocTagId = " + id, function (err, result, fields) {
       if (err) throw err;
 
       res.json(
@@ -170,8 +154,8 @@ app.get('/TopicHistories', function (req, res) {
     const id = Number(urlParams.id);
 
     con.query('SELECT th.Text, tht.Name ' +
-      'FROM topicHistories th ' +
-      'JOIN topicHistoryTypes tht ON th.DocTopicHistoryTypeId = tht.Id ' +
+      'FROM topichistories th ' +
+      'JOIN topichistorytypes tht ON th.DocTopicHistoryTypeId = tht.Id ' +
       'WHERE th.DocTopicId = ' + id,
       function (err, result, fields) {
         if (err) throw err;
@@ -248,94 +232,76 @@ app.post('/Doctags', (req, res) => {
 });
 
 app.post('/Topics', function (req, res) {
-  const syntaxHtml = req.body.syntaxHtml;
-  const parametersHtml = req.body.parametersHtml;
-  const remarksHtml = req.body.remarksHtml;
-  const introductionMarkdown = req.body.introductionMarkdown;
-  const syntaxMarkdown = req.body.syntaxMarkdown;
-  const parametersMarkdown = req.body.parametersMarkdown;
-  const remarksMarkdown = req.body.remarksMarkdown;
-  const helloWorldVersionsHtml = req.body.helloWorldVersionsHtml;
-  const title = req.body.title;
-  const docTagId = req.body.docTagId;
+      const syntaxHtml = req.body.syntaxHtml;
+      const parametersHtml = req.body.parametersHtml;
+      const remarksHtml = req.body.remarksHtml;
+      const introductionMarkdown = req.body.introductionMarkdown;
+      const syntaxMarkdown = req.body.syntaxMarkdown;
+      const parametersMarkdown = req.body.parametersMarkdown;
+      const remarksMarkdown = req.body.remarksMarkdown;
+      const helloWorldVersionsHtml = req.body.helloWorldVersionsHtml;
+      const title = req.body.title;
 
-  const con = mysql.createConnection(databaseCredentials);
+      const con = mysql.createConnection(databaseCredentials);
 
-  const creationDate = new Date().getMilliseconds();
+      const creationDate = new Date().getMilliseconds();
 
-  values = [
-    [docTagId,
-      false,
-      title,
-      creationDate,
-      0,
-      null,
-      0,
-      0,
-      0,
-      0,
-      syntaxHtml,
-      parametersHtml,
-      remarksHtml,
-      introductionMarkdown,
-      syntaxMarkdown,
-      parametersMarkdown,
-      remarksMarkdown,
-      helloWorldVersionsHtml
-    ]
-  ]
+        values = [
+          [doctagId,
+            false,
+            title,
+            creationDate,
+            0,
+            null,
+            0,
+            0,
+            0,
+            0,
+            syntaxHtml,
+            parametersHtml,
+            remarksHtml,
+            introductionMarkdown,
+            syntaxMarkdown,
+            parametersMarkdown,
+            remarksMarkdown,
+            helloWorldVersionsHtml
+          ]
+        ]
 
-  const query = 'INSERT INTO topics (DocTagId, IsHelloWorldTopic, Title, CreationDate, ViewCount, LastEditDate, LastEditUserId, ContributorCount, ExampleCount, ExampleScore, SyntaxHtml, ParametersHtml, RemarksHtml, IntroductionMarkdown, SyntaxMarkdown, ParametersMarkdown, RemarksMarkdown, HelloWorldVersionsHtml) VALUES ?';
+        const query = 'INSERT INTO doctags (Tag, Title, CreationDate, HelloWorldDocTopicId, TopicCount) VALUES ?';
 
-  con.connect((error) => {
-    console.log(error);
-    con.query(query, [values], (err, result) => {
-      if (err) {
-        res.json(false);
-        throw err;
-      }
-      res.json(result);
-    });
+        con.connect((error) => {
+          console.log(error);
+          con.query(query, [values], (err, result) => {
+            if (err) {
+              res.json(false);
+              throw err;
+            }
+            res.json(result);
+          });
 
-    con.end();
-  });
-})
+          con.end();
+        });
+      })
 
-app.post('/Examples', (req, res) => {
-  const title = req.body.title;
-  const bodyHtml = req.body.bodyHtml;
-  const bodyMarkdown = req.body.bodyMarkdown;
-  const docTopicId = req.body.DocTopicId;
 
-  var con = mysql.createConnection(databaseCredentials);
-
-  const creationDate = new Date().getMilliseconds();
-
-  values = [
-    [ docTopicId,
-      title,
-      creationDate,
-      null,
-      0,
-      0,
-      bodyHtml,
-      bodyMarkdown,
-      false
-    ]
-  ]
-
-  const query = 'INSERT INTO examples (DocTopicId, Title, CreationDate, LastEditDate, Score, ContributorCount, BodyHtml, BodyMarkdown, IsPinned) VALUES ?';
-
-  con.connect((error) => {
-    console.log(error);
-    con.query(query, [values], (err, result) => {
-      if (err) {
-        res.json(false);
-        throw err;
-      }
-      res.json(result);
-    });
-
-    con.end();
-  });
-});
+      app.get('/Topic/:id', (req, res) => {
+        var con = mysql.createConnection(databaseCredentials);
+      
+        con.connect(function (err) {
+          if (err) throw err;
+          console.log('Connected!');
+      
+          const id = Number(req.params.id);
+          console.log(id);
+      
+          con.query("SELECT Title FROM topics WHERE Id = " + id + " ", function (err, result, fields) {
+              if (err) throw err;
+      
+              res.json(result[0]);
+            });
+      
+          con.end();
+        })
+      
+      })
