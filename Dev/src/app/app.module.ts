@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './views/main/main.component';
 import { TopicsComponent } from './views/topics/topics.component';
 import { DoctagsComponent } from './views/doctags/doctags.component';
-import { DoctagDialogComponent } from './dialogs/doctag-dialog/doctag-dialog.component';
-import { TopicDialogComponent } from './dialogs/topic-dialog/topic-dialog.component';
 import { TopicComponent } from './views/topic/topic.component';
-import { ExamplesDialogComponent } from './dialogs/examples-dialog/examples-dialog.component';
+
+import { ExamplesDialogComponent,
+         TopicDialogComponent,
+         DoctagDialogComponent,
+         DoctagVersionsDialogComponent } from './dialogs';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,7 +40,8 @@ import { MatFormFieldModule,
     DoctagDialogComponent,
     TopicDialogComponent,
     TopicComponent,
-    ExamplesDialogComponent
+    ExamplesDialogComponent,
+    DoctagVersionsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,6 @@ import { MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DoctagDialogComponent, TopicDialogComponent, ExamplesDialogComponent]
+  entryComponents: [DoctagDialogComponent, TopicDialogComponent, ExamplesDialogComponent, DoctagVersionsDialogComponent]
 })
 export class AppModule { }

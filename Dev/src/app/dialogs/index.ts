@@ -1,3 +1,4 @@
+import { DoctagVersionsDialogComponent } from './doctagversions-dialog/doctagversions-dialog.component';
 import { ExamplesDialogComponent } from './examples-dialog/examples-dialog.component';
 import { TopicDialogComponent } from './topic-dialog/topic-dialog.component';
 import { DoctagDialogComponent } from './doctag-dialog/doctag-dialog.component';
@@ -5,5 +6,6 @@ import { DoctagDialogComponent } from './doctag-dialog/doctag-dialog.component';
 export {
     TopicDialogComponent,
     DoctagDialogComponent,
-    ExamplesDialogComponent
+    ExamplesDialogComponent,
+    DoctagVersionsDialogComponent
 };

@@ -7,11 +7,10 @@ var bodyParser = require('body-parser');
 
 var databaseCredentials = {
   host: 'localhost',
-  port: '3307',
   user: 'root',
-  password: 'password',
-  database: 'crud-cb',
-  charset: 'utf8mb4_unicode_ci'
+  password: '',
+  database: 'crudapp',
+  charset: "utf8mb4_unicode_ci"
 }
 
 app.use(cors({
@@ -147,7 +146,7 @@ app.get('/DoctagVersions', function (req, res) {
 
     let urlParams = url.parse(req.url, true).query;
     const id = Number(urlParams.id);
-    con.query("SELECT * FROM docTagVersions WHERE DocTagId = " + id, function (err, result, fields) {
+    con.query("SELECT * FROM doctagversions WHERE DocTagId = " + id, function (err, result, fields) {
       if (err) throw err;
 
       res.json(
@@ -170,8 +169,8 @@ app.get('/TopicHistories', function (req, res) {
     const id = Number(urlParams.id);
 
     con.query('SELECT th.Text, tht.Name ' +
-      'FROM topicHistories th ' +
-      'JOIN topicHistoryTypes tht ON th.DocTopicHistoryTypeId = tht.Id ' +
+      'FROM topichistories th ' +
+      'JOIN topichistoriestypes tht ON th.DocTopicHistoryTypeId = tht.Id ' +
       'WHERE th.DocTopicId = ' + id,
       function (err, result, fields) {
         if (err) throw err;
@@ -199,8 +198,8 @@ app.get('/Contributors', function (req, res) {
 
     con.query('SELECT c.Id, ct.Name AS "Type", cdr.Name AS "DeletionReason"' +
       'FROM contributors c ' +
-      'LEFT JOIN contributorTypes ct ON c.DocContributorTypeId = ct.Id ' +
-      'LEFT JOIN contributorDeletionReasons cdr ON c.DocContributorDeletionReasonId = cdr.Id ' +
+      'LEFT JOIN contributortypes ct ON c.DocContributorTypeId = ct.Id ' +
+      'LEFT JOIN contributiondeletionreasons cdr ON c.DocContributorDeletionReasonId = cdr.Id ' +
       'WHERE c.DocExampleId = ' + DocExampleId,
       function (err, result, fields) {
         if (err) throw err;

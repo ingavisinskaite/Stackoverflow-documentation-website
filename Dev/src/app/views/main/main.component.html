@@ -1,16 +1,10 @@
 <div fxLayout="column" fxLayoutAlign="space-around center"  >
 
-  <!-- <mat-form-field fxFlex>
-    <mat-label>Choose Doctag</mat-label>
-    <mat-select [(ngModel)]="selectedDoctagId" (ngModelChange)="showTopic($event)">
-      <mat-option *ngFor="let cell of doctagsTest | async" [value]="cell.Id"> {{ cell.Title }} </mat-option>
-    </mat-select>
-  </mat-form-field> -->
-
   <div class="doctags">
     <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <input type="text" placeholder="Choose doctag" aria-label="Doctags" matInput [formControl]="myControl"
+      <mat-form-field class="example-full-width" appearance="outline">
+          <span matPrefix><i class="material-icons">search</i></span>
+        <input type="text" placeholder="Search for Topics" aria-label="Doctags" matInput [formControl]="myControl"
           [matAutocomplete]="auto">
         <mat-autocomplete (optionSelected)="showTopic($event)" #auto="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -22,15 +16,27 @@
     <button mat-flat-button color="primary" (click)="showDoctagFormDialog()"><i class="material-icons">add</i></button>
   </div>
 
-
-  <div *ngIf="selectedDoctagId">
-    <h1> {{ this.selectedTopicTitle }}</h1>
-    <button mat-stroked-button (click)="showDoctagVersions(selectedDoctagId)">Show More</button>
-    <div *ngFor="let version of docTagVersions">Version name: {{ version.Name }}, Release date:
-      {{toHumanDate(version.ReleaseDate)}}</div>
+  <div class="hero-text" *ngIf="!selectedDoctagId">
+    <h1>Welcome to DUMP Admin Panel</h1>
+    <p>Search, edit, and add to the biggest documentation library in the world!<br><br>Future of programming on this planet depends on you my friend. Generations of newbies will be forever grateful and praise your name.</p>
+  </div>
+  <div class="hero-image" *ngIf="!selectedDoctagId">
+    <img src="../../../assets/power.svg" alt="">
   </div>
 
-  <mat-form-field *ngIf="selectedDoctagId" fxFlex>
+
+  <div class="show-doctags" *ngIf="selectedDoctagId">
+    <h1> {{ this.selectedTopicTitle }}</h1>
+    <!-- <button mat-stroked-button (click)="showDoctagVersions(selectedDoctagId)">Show More</button> -->
+    <button mat-stroked-button (click)="openDoctagversionsDialog(selectedDoctagId)">Show More</button>
+    <div class="show-doctagversions-wrapper">
+      <div class="show-doctagversions" *ngFor="let version of docTagVersions">Version name: {{ version.Name }}, Release date:
+        {{toHumanDate(version.ReleaseDate)}}
+      </div>
+    </div>
+  </div>
+
+  <mat-form-field class="filter-form" *ngIf="selectedDoctagId" fxFlex>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
@@ -74,4 +80,5 @@
     [pageIndex]="topicsPageIndex" [pageSizeOptions]="topicsPageSizeOptions"
     (page)="topicsPageEvent = onTopicsPageChange($event)" fxFlex></mat-paginator>
 
+  <!-- <footer><p>Copywrite @CodeBakers 2019</p></footer> -->
 </div>
