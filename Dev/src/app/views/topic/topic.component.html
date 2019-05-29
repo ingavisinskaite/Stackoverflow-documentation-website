@@ -6,10 +6,8 @@
   <div class="container" *ngIf="examples else loading" detect-scroll (onScroll)="handleScroll($event)">
 
     <h1 class="topicTitle" id="top">{{topicTitle}}</h1>
-    <mat-tab-group (selectedTabChange)="getHistory($event)">
+    <mat-tab-group mat-stretch-tabs (selectedTabChange)="getHistory($event)">
       <mat-tab label="Examples">
-        <button mat-raised-button class="addExample" color="warn" (click)="showExampleFormDialog()"><i
-            class="material-icons">add</i></button>
         <mat-accordion *ngFor="let example of examples">
           <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="example.Id == firstExampleId"
             (closed)="panelOpenState = false">
@@ -23,10 +21,12 @@
             <div [innerHTML]="example.BodyHtml"></div>
           </mat-expansion-panel>
         </mat-accordion>
+        <button mat-raised-button class="addExample" color="warn" (click)="showExampleFormDialog()"><i
+          class="material-icons">add</i></button>
       </mat-tab>
 
       <mat-tab label="History" (selectedTabChange)="getHistory($event)">
-        <div><pre class="topicHistories">{{ topicHistories }}</pre></div>
+        <div *ngIf="topicHistories else loading"><pre class="topicHistories">{{ topicHistories }}</pre></div>
       </mat-tab>
     </mat-tab-group>
 
