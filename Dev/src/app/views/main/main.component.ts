@@ -152,12 +152,12 @@ export class MainComponent implements AfterViewInit, OnInit {
     this._router.navigateByUrl(`${this.selectedTopicTitle}/${topicId}`);
   }
 
-  // public showDoctagVersions(event: any): void {
-  //   this._appDataService.getDoctagVersions(event)
-  //     .then(data => {
-  //       this.docTagVersions = data;
-  //     });
-  // }
+  public showDoctagVersions(event: any): void {
+    this._appDataService.getDoctagVersions(event)
+      .then(data => {
+        this.docTagVersions = data;
+      });
+  }
 
   public showDoctagVersions(event: any): Promise<DocTagVersions[]> {
     return this._appDataService.getDoctagVersions(event);
