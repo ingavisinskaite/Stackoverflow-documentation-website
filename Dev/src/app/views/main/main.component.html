@@ -29,10 +29,12 @@
     </div>
 
     <div class="show-doctags-wraper" *ngIf="selectedDoctagId" fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
-      <div class="show-versions-wrap" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-        <h1 class="selected-topic-h1" fxFlex> {{ this.selectedDoctagTitle }} </h1>
-        <button mat-stroked-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
-      </div>
+      <h1 class="selected-topic-h1" fxFlex> {{ this.selectedDoctagTitle }} </h1>
+      <button class="add-topic-button" mat-stroked-button (click)="showTopicFormDialog()" fxFlex><i class="material-icons">add</i>Add Topic</button>
+      <!-- <div class="show-versions-wrap" fxLayout="row" fxLayoutAlign="end center" fxFlex>
+        <button class="show-versions-button" mat-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
+        <button class="add-topic-button" mat-stroked-button (click)="showTopicFormDialog()" fxFlex><i class="material-icons">add</i>Add Topic</button>
+      </div> -->
     </div>
     
     <!--DO WE NEED FILTERING HERE?-->
