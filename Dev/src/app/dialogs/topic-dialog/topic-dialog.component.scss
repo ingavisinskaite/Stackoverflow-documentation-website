@@ -32,9 +32,16 @@ form {
   padding: 0;
 }
 .mat-card{
-  height: 95vh;
+  width: 43vw;
+  height: 45vh;
   overflow: hidden;
 }
 ::ng-deep .mat-form-field-infix{
   border-top: 0.4075em solid transparent;
+}
+::ng-deep .ng-star-inserted{
+  margin: 0;
+}
+#form{
+  flex-wrap: wrap;
 }
