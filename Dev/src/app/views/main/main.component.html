@@ -65,9 +65,12 @@
         <ng-container matColumnDef="Actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="primary"(click)="navigateToTopic(element.Id)">View</button> 
-            <button mat-raised-button color="warn">Edit</button>
-            <button mat-raised-button color=""(click)="confirmTopicDelete()">Delete</button> 
+            <!-- <button mat-raised-button color="primary"(click)="navigateToTopic(element.Id)">View</button> -->
+            <i class="material-icons" (click)="navigateToTopic(element.Id)">visibility</i> 
+            <!-- <button mat-raised-button color="warn">Edit</button> -->
+            <i class="material-icons">edit</i>
+            <!-- <button mat-raised-button color=""(click)="confirmTopicDelete()">Delete</button> -->
+            <i class="material-icons" (click)="confirmTopicDelete()">delete</i> 
           </td>
         </ng-container>
   
