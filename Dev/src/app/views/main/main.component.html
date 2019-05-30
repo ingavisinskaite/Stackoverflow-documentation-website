@@ -1,11 +1,11 @@
-<div fxLayout="column" fxLayoutAlign="space-around center"  >
+<div fxLayout="column" fxLayoutAlign="space-around center">
 
-    <div class="search-bar-wraper" fxLayout="row" fxLayoutAlign="space-between center" >
-      <form class="example-form" fxFlex>
+    <div class="search-bar-wraper" fxLayout="row" fxLayoutAlign="center center" fxFlex>
+      <form class="example-form" >
         <mat-form-field class="example-full-width" appearance="outline">
             <span matPrefix><i class="material-icons">search</i></span>
           <input type="text" placeholder="Search for Topics" aria-label="Doctags" matInput [formControl]="myControl"
-            [matAutocomplete]="auto">
+            [matAutocomplete]="auto" fxFlex>
           <mat-autocomplete (optionSelected)="showTopic($event)" #auto="matAutocomplete" [displayWith]="displayFn">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
               {{option.Title}}
@@ -16,27 +16,32 @@
       <button class="add-doctag-button" mat-flat-button color="primary" (click)="showDoctagFormDialog()" fxFlex><i class="material-icons">add</i>Add Doctag</button>
     </div>
   
-    <div class="hero-text" *ngIf="!selectedDoctagId">
-      <h1>Welcome to DUMP Admin Panel</h1>
-      <p>Search, edit, and add to the biggest documentation library in the world!<br><br>
-        Future of programming on this planet depends on you my friend. Generations 
-        of newbies will be forever grateful and praise your name.</p>
+    <div class="hero-wrap" fxLayout="column" fxLayoutAlign="space-between center" fxFlex>
+      <div class="hero-text" *ngIf="!selectedDoctagId" fxFlex>
+        <h1>Welcome to DUMP Admin Panel</h1>
+        <p>Search, edit, and add to the biggest documentation library in the world!<br><br>
+          Future of programming on this planet depends on you my friend. Generations 
+          of newbies will be forever grateful and praise your name.</p>
+      </div>
+      <div class="hero-image" *ngIf="!selectedDoctagId" fxFlex>
+        <img src="../../../assets/power.svg" alt="">
+      </div>
     </div>
-    <div class="hero-image" *ngIf="!selectedDoctagId">
-      <img src="../../../assets/power.svg" alt="">
-    </div>
-  
-    <div class="show-doctags-wraper" *ngIf="selectedDoctagId" fxLayout="row" fxLayoutAlign="space-between stretch">
-      <h1 fxFlex> {{ this.selectedTopicTitle }} </h1>
-      <button mat-stroked-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
+
+    <div class="show-doctags-wraper" *ngIf="selectedDoctagId" fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
+      <div class="show-versions-wrap" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+        <h1 class="selected-topic-h1" fxFlex> {{ this.selectedTopicTitle }} </h1>
+        <button mat-stroked-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
+      </div>
       <button mat-stroked-button (click)="showTopicFormDialog()" fxFlex>Add Topic</button>
     </div>
-  
+    
+    <!--DO WE NEED FILTERING HERE?-->
     <!-- <mat-form-field class="filter-form" *ngIf="selectedDoctagId" fxFlex>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field> -->
   
-    <div class="table-wrap" fxLayout="column" fxLayoutAlign=" stretch">
+    <div class="table-wrap" fxLayout="column" fxLayoutAlign=" stretch" fxFlex>
       
       <table mat-table [dataSource]="topics" matSort matSortActive="Title" matSortDirection="asc" matSortDisableClear
         class="mat-elevation-z8" [ngClass]="topics ? 'visible': 'hidden'" fxFlex>
@@ -69,6 +74,7 @@
       <mat-paginator *ngIf="selectedDoctagId" [length]="topicsListLength" [pageSize]="topicsPageSize"
         [pageIndex]="topicsPageIndex" [pageSizeOptions]="topicsPageSizeOptions"
         (page)="topicsPageEvent = onTopicsPageChange($event)" fxFlex></mat-paginator>
+
     </div>
   
   </div>

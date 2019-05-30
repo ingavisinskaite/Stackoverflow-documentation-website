@@ -1,14 +1,16 @@
 .search-bar-wraper {
     width: 65vw;
     margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 .example-form {
-    min-width: 150px;
+    width: 60%;
+    padding-right: 16px;
 }
-  
+
 .example-full-width {
-    // width: 75%;
+    width: 100%;
 }
 
 // Search-bar placeholder position verticaly centered;
@@ -16,13 +18,29 @@
     padding: 1em 0 1.3em .3em;
 }
 
-.add-doctag-button {
-    height: 40px;
+// Search-bar had a padding-bottom of 1.34375em that affected vertical centering. 
+::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+}
+
+// Why is this thing here? If I change margin-left to 0 - footer is affected, why?
+::ng-deep .ng-star-inserted {
+    margin-left: 0px;
+}
+
+// Add Doctag button. Why I get error if I remove it?
+.mat-flat-button {
+    height: 50px;
     max-width: 160px;
 }
 
+.hero-wrap {
+    width: 65vw;
+    height: 40vh;
+}
+
 .hero-text {
-    width: 50%;
+    width: 70%;
     text-align: center;
 }
 
@@ -34,29 +52,36 @@
 
 .show-doctags-wraper {
     width: 65vw;
-    padding-bottom: 24px;
+    margin-bottom: 24px;
 }
 
-::ng-deep .mat-form-field-wrapper{
-    margin-left: 20px;
-    margin-top: 20px;
+.show-versions-wrap {
+    min-width: 70%;
 }
 
-::ng-deep .ng-star-inserted {
-    margin-left: 20px;
+.selected-topic-h1 {
+    max-width: 300px;
+}
+
+.mat-stroked-button {
+    max-width: 160px;
+}
+
 .table-wrap {
     width: 65vw;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+    margin-bottom: 24px;
 }
 
 // Table paginator styled;
 ::ng-deep .mat-paginator {
     width: 100%;
-    // box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
 }
 
-// Table width;
+// Table width. Took off box-shadow and applied it to .table-wrap to style both table and paginator;
 .mat-elevation-z8 {
     width: 100%;
+    box-shadow: none;
 }
 
 // Table revealed/hidden with this class instead "ngIf";
@@ -76,8 +101,3 @@ tr {
     max-width: 30%;
 }
 
-.mat-flat-button {
-    margin-left: 20px;
-    height: 50px;
-    margin-top: 20px;
-}}
