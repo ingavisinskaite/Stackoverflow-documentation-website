@@ -73,4 +73,9 @@ export class AppDataService {
     return this._http.get<any>(url).toPromise();
   }
 
+  public deleteTopic(id: number): Promise<Array<Topics>> {
+    const url = 'http://localhost:1337/Topics/delete';
+    return this._http.post<Array<Topics>>(url, id).toPromise();
+  }
+
 }

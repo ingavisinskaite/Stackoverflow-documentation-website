@@ -11,9 +11,9 @@ import {
 } from '../../models';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
 import { AppDataService } from '../../services/app-data.service';
-import { DoctagDialogComponent, TopicDialogComponent, DoctagVersionsDialogComponent } from '../../dialogs';
+import { DoctagDialogComponent, TopicDialogComponent, DoctagVersionsDialogComponent, DeleteTopicDialogComponent } from '../../dialogs';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -37,7 +37,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   topicHistories: Array<TopicHistories>;
 
   selectedDoctagId: number;
-  selectedTopicTitle: string = null;
+  selectedDoctagTitle: string = null;
   topicsPageIndex = 0;
   topicsListLength = 100;
   topicsPageSize = 10;
@@ -71,7 +71,7 @@ export class MainComponent implements AfterViewInit, OnInit {
 
         const doctagTitle = this._activatedRoute.snapshot.params['doctagTitle'];
         if (doctagTitle) {
-          this.selectedTopicTitle = doctagTitle;
+          this.selectedDoctagTitle = doctagTitle;
           const doctagId = this.docTags.find(x => x.Title === doctagTitle).Id;
           this.selectedDoctagId = doctagId;
           this._appDataService.getTopicsCount(doctagId).then(data => {
@@ -131,8 +131,8 @@ export class MainComponent implements AfterViewInit, OnInit {
     const docTagId = event.option.value.Id;
     this.selectedDoctagId = docTagId;
 
-    this.selectedTopicTitle = this.docTags.find(x => x.Id === docTagId).Title;
-    this._router.navigateByUrl(`${this.selectedTopicTitle}`);
+    this.selectedDoctagTitle = this.docTags.find(x => x.Id === docTagId).Title;
+    this._router.navigateByUrl(`${this.selectedDoctagTitle}`);
     this._appDataService.getTopicsCount(docTagId).then(data => {
       this.topicsListLength = data[0].Count;
     });
@@ -148,7 +148,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   }
 
   public navigateToTopic(topicId: string): void {
-    this._router.navigateByUrl(`${this.selectedTopicTitle}/${topicId}`);
+    this._router.navigateByUrl(`${this.selectedDoctagTitle}/${topicId}`);
   }
 
   public showDoctagVersions(event: any): Promise<DocTagVersions[]> {
@@ -198,6 +198,10 @@ export class MainComponent implements AfterViewInit, OnInit {
 
   public openDoctagversionsDialog(event: string) {
     this._dialog.open(DoctagVersionsDialogComponent, {data: event});
+  }
+
+  public confirmTopicDelete(): void{
+    this._dialog.open(DeleteTopicDialogComponent, {data: event});
   }
 
   public toHumanDate(date: string): Date {

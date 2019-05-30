@@ -16,7 +16,8 @@ import {
         ExamplesDialogComponent,
         TopicDialogComponent,
         DoctagDialogComponent,
-        DoctagVersionsDialogComponent} from './dialogs';
+        DoctagVersionsDialogComponent,
+        DeleteTopicDialogComponent} from './dialogs';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -52,7 +53,8 @@ import { ScrollEventModule } from 'ngx-scroll-event';
     TopicComponent,
     LogoComponent,
     ExamplesDialogComponent,
-    DoctagVersionsDialogComponent
+    DoctagVersionsDialogComponent,
+    DeleteTopicDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +82,10 @@ import { ScrollEventModule } from 'ngx-scroll-event';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DoctagDialogComponent, TopicDialogComponent, ExamplesDialogComponent, DoctagVersionsDialogComponent]
+  entryComponents: [DoctagDialogComponent,
+                    TopicDialogComponent,
+                    ExamplesDialogComponent,
+                    DoctagVersionsDialogComponent,
+                    DeleteTopicDialogComponent]
 })
 export class AppModule { }
