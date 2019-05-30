@@ -68,7 +68,6 @@ export class MainComponent implements AfterViewInit, OnInit {
     this._appDataService.getDoctags()
       .then(data => {
         this.docTags = data;
-        console.log(data);
 
         const doctagTitle = this._activatedRoute.snapshot.params['doctagTitle'];
         if (doctagTitle) {
