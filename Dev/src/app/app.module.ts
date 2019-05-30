@@ -41,6 +41,7 @@ import {
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
+import { DeleteExampleDialogComponent } from './dialogs/delete-example-dialog/delete-example-dialog.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { ScrollEventModule } from 'ngx-scroll-event';
     LogoComponent,
     ExamplesDialogComponent,
     DoctagVersionsDialogComponent,
-    DeleteTopicDialogComponent
+    DeleteTopicDialogComponent,
+    DeleteExampleDialogComponent
   ],
   imports: [
     BrowserModule,
