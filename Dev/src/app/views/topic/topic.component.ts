@@ -53,6 +53,7 @@ export class TopicComponent implements OnInit {
     return this._appDataService.getExamples(topicId)
       .then(data => {
         this.examples = data;
+        this.firstExampleId = data[0].Id;
         console.log(data);
       });
   }

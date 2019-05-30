@@ -9,26 +9,24 @@
     padding-right: 16px;
 }
 
-.example-full-width {
+.search-bar {
     width: 100%;
+    // Search-bar placeholder position verticaly centered;
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding: 1em 0 1.3em .3em;
+    }
+
+    // Search-bar had a padding-bottom of 1.34375em that affected vertical centering. 
+    ::ng-deep .mat-form-field-wrapper {
+        padding-bottom: 0;
+    }
 }
 
-// Search-bar placeholder position verticaly centered;
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-    padding: 1em 0 1.3em .3em;
-}
+// ::ng-deep .ng-star-inserted {
+//     margin-left: 0px;
+// }
 
-// Search-bar had a padding-bottom of 1.34375em that affected vertical centering. 
-::ng-deep .mat-form-field-wrapper {
-    padding-bottom: 0;
-}
-
-// Why is this thing here? If I change margin-left to 0 - footer is affected, why?
-::ng-deep .ng-star-inserted {
-    margin-left: 0px;
-}
-
-// Add Doctag button. Why I get error if I remove it?
+// Add Doctag button;
 .mat-flat-button {
     height: 50px;
     max-width: 160px;
@@ -55,16 +53,21 @@
     margin-bottom: 24px;
 }
 
-.show-versions-wrap {
-    min-width: 70%;
-}
-
 .selected-topic-h1 {
-    max-width: 300px;
+    min-width: 60%;
 }
 
-.mat-stroked-button {
-    max-width: 160px;
+.show-versions-button {
+    max-width: 140px;
+    margin-right: 4px;
+}
+
+.add-topic-button {
+    max-width: 140px;
+    .material-icons {
+        opacity: 0.5;
+        font-size: 18px;
+    }
 }
 
 .table-wrap {

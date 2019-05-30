@@ -2,7 +2,7 @@
 
     <div class="search-bar-wraper" fxLayout="row" fxLayoutAlign="center center" fxFlex>
       <form class="example-form" >
-        <mat-form-field class="example-full-width" appearance="outline">
+        <mat-form-field class="search-bar" appearance="outline">
             <span matPrefix><i class="material-icons">search</i></span>
           <input type="text" placeholder="Search for Topics" aria-label="Doctags" matInput [formControl]="myControl"
             [matAutocomplete]="auto" fxFlex>
@@ -30,10 +30,9 @@
 
     <div class="show-doctags-wraper" *ngIf="selectedDoctagId" fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
       <div class="show-versions-wrap" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-        <h1 class="selected-topic-h1" fxFlex> {{ this.selectedTopicTitle }} </h1>
+        <h1 class="selected-topic-h1" fxFlex> {{ this.selectedDoctagTitle }} </h1>
         <button mat-stroked-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
       </div>
-      <button mat-stroked-button (click)="showTopicFormDialog()" fxFlex>Add Topic</button>
     </div>
     
     <!--DO WE NEED FILTERING HERE?-->
@@ -48,7 +47,7 @@
   
         <ng-container matColumnDef="Title">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
-          <td mat-cell *matCellDef="let element"> {{ element.Title }} </td>
+          <td mat-cell *matCellDef="let element" (click)="navigateToTopic(element.Id)"> {{ element.Title }} </td>
         </ng-container>
   
         <ng-container matColumnDef="CreationDate">
@@ -62,12 +61,16 @@
         </ng-container>
   
         <ng-container matColumnDef="Actions">
-          <th mat-header-cell *matHeaderCellDef> More </th>
-          <td mat-cell *matCellDef="let element"> </td>
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button color="primary"(click)="navigateToTopic(element.Id)">View</button> 
+            <button mat-raised-button color="warn">Edit</button>
+            <button mat-raised-button color=""(click)="confirmTopicDelete()">Delete</button> 
+          </td>
         </ng-container>
   
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToTopic(row.Id)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   
       </table>
   
