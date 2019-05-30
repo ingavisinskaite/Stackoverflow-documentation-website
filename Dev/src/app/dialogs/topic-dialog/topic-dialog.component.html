@@ -10,7 +10,8 @@
         <!-- <textarea matInput placeholder="Topic title" formControlName="title" required></textarea> -->
         <mat-error *ngIf="topicForm.controls['title'].hasError"> Topic title is invalid </mat-error>
       </mat-form-field >
-      <mat-tab-group dynamicHeight > 
+      
+      <mat-tab-group dynamicHeight [formGroup]="topicForm" > 
         <!-- <input type="text" matInput formControlName="syntaxHtml" placeholder="Syntax Html" required> -->
         <mat-tab label="Syntax Html">
         <textarea matInput placeholder="Syntax Html" formControlName="syntaxHtml" required ></textarea>
