@@ -37,5 +37,8 @@ export class DoctagVersionsDialogComponent implements OnInit {
     return dateObj;
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 }
