@@ -1,7 +1,8 @@
 module.exports = Object.freeze({
     host: 'localhost',
+    port: '3307',
     user: 'root',
-    password: '',
-    database: 'crudapp',
-    charset: "utf8mb4_unicode_ci"
+    password: 'password',
+    database: 'crud-cb',
+    charset: 'utf8mb4_unicode_ci'
 });
