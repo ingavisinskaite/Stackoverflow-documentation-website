@@ -1,44 +1,53 @@
-<mat-card>
+<mat-card >
     <i class="material-icons" id="close3" (click)="closeTopicDial()">
         close
         </i>
   <mat-card-title>Add Topic  </mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="topicForm">
-      <mat-form-field>
-        <input type="text" matInput formControlName="title" placeholder="Topic title" required>
+  <mat-card-content >
+    <form [formGroup]="topicForm" id="form" fxLayout="row" fxLayoutAlign="flex-start" fxLayoutGap="20px" >
+      <mat-form-field  >
+        <input type="text" matInput formControlName="title" placeholder="Topic title" required fxLayout="row"  >
+        <!-- <textarea matInput placeholder="Topic title" formControlName="title" required></textarea> -->
         <mat-error *ngIf="topicForm.controls['title'].hasError"> Topic title is invalid </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input type="text" matInput formControlName="syntaxHtml" placeholder="Syntax Html" required>
+      </mat-form-field >
+      <mat-form-field > 
+        <!-- <input type="text" matInput formControlName="syntaxHtml" placeholder="Syntax Html" required> -->
+        <textarea matInput placeholder="Syntax Html" formControlName="syntaxHtml" required fxLayout="row"></textarea>
         <mat-error *ngIf="topicForm.controls['syntaxHtml'].hasError"> Tag is invalid </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input type="text" matInput formControlName="parametersHtml" placeholder="Parameters Html" required>
+      <mat-form-field  >
+        <!-- <input type="text" matInput formControlName="parametersHtml" placeholder="Parameters Html" required> -->
+        <textarea matInput placeholder="Parameters Html" formControlName="parametersHtml" required fxLayout="row"></textarea>
         <mat-error *ngIf="topicForm.controls['parametersHtml'].hasError"> Tag is invalid </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input type="text" matInput formControlName="remarksHtml" placeholder="Remarks Html" required>
+      <mat-form-field  >
+        <!-- <input type="text" matInput formControlName="remarksHtml" placeholder="Remarks Html" required> -->
+        <textarea matInput placeholder="Remarks Html" formControlName="remarksHtml" required fxLayout="row"></textarea>
         <mat-error *ngIf="topicForm.controls['remarksHtml'].hasError"> Tag is invalid </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input type="text" matInput formControlName="introductionMarkdown" placeholder="Introduction Markdown" required>
+      <mat-form-field  >
+        <!-- <input type="text" matInput formControlName="introductionMarkdown" placeholder="Introduction Markdown" required> -->
+        <textarea matInput placeholder="Introduction Markdown" formControlName="introductionMarkdown" required fxLayout="row"></textarea>
         <mat-error *ngIf="topicForm.controls['introductionMarkdown'].hasError"> Tag is invalid </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input type="text" matInput formControlName="syntaxMarkdown" placeholder="Syntax Markdown" required>
+      <mat-form-field  >
+        <!-- <input type="text" matInput formControlName="syntaxMarkdown" placeholder="Syntax Markdown" required> -->
+        <textarea matInput placeholder="Syntax Markdown" formControlName="syntaxMarkdown" required fxLayout="row" ></textarea>
         <mat-error *ngIf="topicForm.controls['syntaxMarkdown'].hasError"> Tag is invalid </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input type="text" matInput formControlName="parametersMarkdown" placeholder="Parameters Markdown" required>
+      <mat-form-field   >
+        <!-- <input type="text" matInput formControlName="parametersMarkdown" placeholder="Parameters Markdown" required> -->
+        <textarea matInput placeholder="Parameters Markdown" formControlName="parametersMarkdown" required fxLayout="row"></textarea>
         <mat-error *ngIf="topicForm.controls['parametersMarkdown'].hasError"> Tag is invalid </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input type="text" matInput formControlName="remarksMarkdown" placeholder="Remarks Markdown" required>
+      <mat-form-field  >
+        <!-- <input type="text" matInput formControlName="remarksMarkdown" placeholder="Remarks Markdown" required> -->
+        <textarea matInput placeholder="Remarks Markdown" formControlName="remarksMarkdown" required fxLayout="row"></textarea>
         <mat-error *ngIf="topicForm.controls['remarksMarkdown'].hasError"> Tag is invalid </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input type="text" matInput formControlName="helloWorldVersionsHtml" placeholder="Hello World Versions Html" required>
+      <mat-form-field  >
+        <!-- <input type="text" matInput formControlName="helloWorldVersionsHtml" placeholder="Hello World Versions Html" required> -->
+        <textarea matInput placeholder="Hello World Versions Html" formControlName="helloWorldVersionsHtml" required fxLayout="row"></textarea>
         <mat-error *ngIf="topicForm.controls['helloWorldVersionsHtml'].hasError"> Tag is invalid </mat-error>
       </mat-form-field>
     </form>
