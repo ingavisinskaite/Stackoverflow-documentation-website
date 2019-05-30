@@ -2,7 +2,7 @@
 
     <div class="search-bar-wraper" fxLayout="row" fxLayoutAlign="center center" fxFlex>
       <form class="example-form" >
-        <mat-form-field class="example-full-width" appearance="outline">
+        <mat-form-field class="search-bar" appearance="outline">
             <span matPrefix><i class="material-icons">search</i></span>
           <input type="text" placeholder="Search for Topics" aria-label="Doctags" matInput [formControl]="myControl"
             [matAutocomplete]="auto" fxFlex>
@@ -29,11 +29,11 @@
     </div>
 
     <div class="show-doctags-wraper" *ngIf="selectedDoctagId" fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
-      <div class="show-versions-wrap" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-        <h1 class="selected-topic-h1" fxFlex> {{ this.selectedTopicTitle }} </h1>
-        <button mat-stroked-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
+      <h1 class="selected-topic-h1" fxFlex> {{ this.selectedTopicTitle }} </h1>
+      <div class="show-versions-wrap" fxLayout="row" fxLayoutAlign="end center" fxFlex>
+        <button class="show-versions-button" mat-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
+        <button class="add-topic-button" mat-stroked-button (click)="showTopicFormDialog()" fxFlex><i class="material-icons">add</i>Add Topic</button>
       </div>
-      <button mat-stroked-button (click)="showTopicFormDialog()" fxFlex>Add Topic</button>
     </div>
     
     <!--DO WE NEED FILTERING HERE?-->
