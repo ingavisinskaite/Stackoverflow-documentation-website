@@ -189,6 +189,7 @@ export class MainComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         if (!result) { return; } else {
+          result.docTagId = this.selectedDoctagId;
           this._appDataService.addTopic(result).subscribe(data => {
             console.log('Inserted topic:');
             console.log(data);
@@ -201,12 +202,12 @@ export class MainComponent implements AfterViewInit, OnInit {
     this._dialog.open(DoctagVersionsDialogComponent, {data: event});
   }
 
-  public confirmTopicDelete(): void{
-    this._dialog.open(DeleteTopicDialogComponent, {data: event});
+  public confirmTopicDelete(topicId: number): void{
+    this._dialog.open(DeleteTopicDialogComponent, {data: {topicId}});
   }
 
   public toHumanDate(date: string): Date {
-    if (!date) { return; }
+    if (!date || date.length < 10) { return; }
     const partOne = date.split('(')[1];
     const partTwo = Number(partOne.split('-')[0]);
     const dateObj = new Date(partTwo);

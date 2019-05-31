@@ -1,3 +1,4 @@
+import { TopicDialogData } from './topicDialogData';
 import { ExamplesData } from './examplesData.model';
 import { TopicsData } from './../models/topicsData.model';
 import { TopicHistoryTypes } from './Topichistorytypes.model';
@@ -22,5 +23,6 @@ export {
     DocTagVersions,
     Examples,
     TopicsData,
-    ExamplesData
+    ExamplesData,
+    TopicDialogData
 };

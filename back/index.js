@@ -212,7 +212,7 @@ app.post('/Doctags', (req, res) => {
 
   var con = mysql.createConnection(databaseCredentials);
 
-  const creationDate = new Date().getMilliseconds();
+  const creationDate = '/Date(' + new Date().getTime() + '-0400)/';
 
   values = [
     [tag,
@@ -240,6 +240,7 @@ app.post('/Doctags', (req, res) => {
 });
 
 app.post('/Topics', function (req, res) {
+  const introductionHtml = req.body.introductionHtml;
   const syntaxHtml = req.body.syntaxHtml;
   const parametersHtml = req.body.parametersHtml;
   const remarksHtml = req.body.remarksHtml;
@@ -249,10 +250,11 @@ app.post('/Topics', function (req, res) {
   const remarksMarkdown = req.body.remarksMarkdown;
   const helloWorldVersionsHtml = req.body.helloWorldVersionsHtml;
   const title = req.body.title;
+  const doctagId = req.body.docTagId;
 
   const con = mysql.createConnection(databaseCredentials);
 
-  const creationDate = new Date().getMilliseconds();
+  const creationDate = '/Date(' + new Date().getTime() + '-0400)/';
 
   values = [
     [doctagId,
@@ -262,9 +264,11 @@ app.post('/Topics', function (req, res) {
       0,
       null,
       0,
+      null,
       0,
       0,
       0,
+      introductionHtml,
       syntaxHtml,
       parametersHtml,
       remarksHtml,
@@ -276,7 +280,7 @@ app.post('/Topics', function (req, res) {
     ]
   ]
 
-  const query = 'INSERT INTO doctags (Tag, Title, CreationDate, HelloWorldDocTopicId, TopicCount) VALUES ?';
+  const query = 'INSERT INTO topics (DocTagId, IsHelloWorldTopic, Title, CreationDate, ViewCount, LastEditDate, LastEditUserId, LastEditUserDisplayName, ContributorCount, ExampleCount, ExampleScore, IntroductionHtml, SyntaxHtml, ParametersHtml, RemarksHtml, IntroductionMarkdown, SyntaxMarkdown, ParametersMarkdown, RemarksMarkdown, HelloWorldVersionsHtml) VALUES ?';
 
   con.connect((error) => {
     console.log(error);
@@ -292,20 +296,21 @@ app.post('/Topics', function (req, res) {
   });
 })
 
-app.delete('Topics/delete', (req, res) => {
+app.delete('/deleteTopic/:id', (req, res) => {
   const con = mysql.createConnection(databaseCredentials);
+  const topicId = Number(req.params.id);
+  console.log(topicId);
 
   con.connect(function (err) {
     if (err) throw err;
     console.log('Connected!');
 
-    const topicId = Number(req.body.id);
-    console.log(id);
-
     con.query('DELETE FROM topics WHERE Id = ' + topicId, function (err, result, fields) {
-      if (err) throw err;
-
-      console.log('Successfully deleted')
+      if (err) {
+        res.json(false);
+        throw err;
+      }
+      console.log('Successfully deleted');
     });
 
     con.end();
