@@ -3,5 +3,5 @@ module.exports = Object.freeze({
     user: 'root',
     password: '',
     database: 'crudapp',
-    charset: "utf8mb4_unicode_ci"
+    charset: 'utf8mb4_unicode_ci'
 });

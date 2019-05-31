@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AppDataService } from '../../services/app-data.service';
 import { Subscription } from 'rxjs';
 import { MatDialogRef } from '@angular/material';

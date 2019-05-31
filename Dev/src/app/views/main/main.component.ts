@@ -182,7 +182,8 @@ export class MainComponent implements AfterViewInit, OnInit {
 
   public showTopicFormDialog() {
     const dialogRef = this._dialog.open(TopicDialogComponent, {
-      data: { name: 'test', animal: 'dog' }
+      data: { name: 'test', animal: 'dog' },
+      width: '92vw'
     });
 
     dialogRef.afterClosed()
