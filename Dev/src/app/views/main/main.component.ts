@@ -190,9 +190,11 @@ export class MainComponent implements AfterViewInit, OnInit {
       .subscribe(result => {
         if (!result) { return; } else {
           result.docTagId = this.selectedDoctagId;
-          this._appDataService.addTopic(result).subscribe(data => {
+          this._appDataService.addTopic(result)
+            .subscribe(data => {
             console.log('Inserted topic:');
             console.log(data);
+            // 
           });
         }
       });

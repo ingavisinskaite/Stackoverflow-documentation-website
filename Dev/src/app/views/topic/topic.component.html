@@ -19,6 +19,7 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div [innerHTML]="example.BodyHtml"></div>
+            <i class="material-icons deleteExample" (click)="confirmExampleDelete(example.Id)">delete</i> 
           </mat-expansion-panel>
         </mat-accordion>
         <button mat-raised-button class="addExample" color="warn" (click)="showExampleFormDialog()"><i

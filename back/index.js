@@ -296,6 +296,45 @@ app.post('/Topics', function (req, res) {
   });
 })
 
+app.post('/Examples', (req, res) => {
+  const title = req.body.title;
+  const bodyHtml = req.body.bodyHtml;
+  const bodyMarkdown = req.body.bodyMarkdown;
+  const docTopicId = req.body.docTopicId;
+
+  var con = mysql.createConnection(databaseCredentials);
+
+  const creationDate = '/Date(' + new Date().getTime() + '-0400)/';
+
+  values = [
+    [docTopicId,
+      title,
+      creationDate,
+      null,
+      0,
+      0,
+      bodyHtml,
+      bodyMarkdown,
+      false
+    ]
+  ]
+
+  const query = 'INSERT INTO examples (DocTopicId, Title, CreationDate, LastEditDate, Score, ContributorCount, BodyHtml, BodyMarkdown, IsPinned) VALUES ?';
+
+  con.connect((error) => {
+    console.log(error);
+    con.query(query, [values], (err, result) => {
+      if (err) {
+        res.json(false);
+        throw err;
+      }
+      res.json(result);
+    });
+
+    con.end();
+  });
+});
+
 app.delete('/deleteTopic/:id', (req, res) => {
   const con = mysql.createConnection(databaseCredentials);
   const topicId = Number(req.params.id);
@@ -306,6 +345,26 @@ app.delete('/deleteTopic/:id', (req, res) => {
     console.log('Connected!');
 
     con.query('DELETE FROM topics WHERE Id = ' + topicId, function (err, result, fields) {
+      if (err) {
+        res.json(false);
+        throw err;
+      }
+      console.log('Successfully deleted');
+    });
+
+    con.end();
+  })
+})
+
+app.delete('/deleteExample/:id', (req, res) => {
+  const con = mysql.createConnection(databaseCredentials);
+  const exampleId = Number(req.params.id);
+
+  con.connect(function (err) {
+    if (err) throw err;
+    console.log('Connected!');
+
+    con.query('DELETE FROM examples WHERE Id = ' + exampleId, function (err, result, fields) {
       if (err) {
         res.json(false);
         throw err;

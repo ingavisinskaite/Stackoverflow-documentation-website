@@ -17,7 +17,8 @@ import {
         TopicDialogComponent,
         DoctagDialogComponent,
         DoctagVersionsDialogComponent,
-        DeleteTopicDialogComponent} from './dialogs';
+        DeleteTopicDialogComponent,
+        DeleteExampleDialogComponent} from './dialogs';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -41,7 +42,6 @@ import {
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
-import { DeleteExampleDialogComponent } from './dialogs/delete-example-dialog/delete-example-dialog.component';
 
 
 @NgModule({
@@ -89,6 +89,7 @@ import { DeleteExampleDialogComponent } from './dialogs/delete-example-dialog/de
                     TopicDialogComponent,
                     ExamplesDialogComponent,
                     DoctagVersionsDialogComponent,
-                    DeleteTopicDialogComponent]
+                    DeleteTopicDialogComponent,
+                    DeleteExampleDialogComponent]
 })
 export class AppModule { }
