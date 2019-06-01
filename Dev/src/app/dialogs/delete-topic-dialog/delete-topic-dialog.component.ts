@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AppDataService } from '../../services/app-data.service';
 import { Subscription } from 'rxjs';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { TopicDialogData } from '../../models';
 
 
 @Component({
@@ -14,9 +15,11 @@ export class DeleteTopicDialogComponent implements OnInit {
   topicTitle: string;
 
   constructor(private _appDataService: AppDataService,
-              public dialogRef: MatDialogRef<DeleteTopicDialogComponent> ) { }
+              public dialogRef: MatDialogRef<DeleteTopicDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: TopicDialogData ) { }
 
   ngOnInit() {
+    this.downloadTopic(this.data.topicId);
   }
 
   public deleteTopic(id: number): void {
@@ -24,6 +27,7 @@ export class DeleteTopicDialogComponent implements OnInit {
       .then(data => {
         console.log('Deleted topic:' + data);
       });
+    this.closeTopicDeleteDialog();
   }
 
   public downloadTopic(topicId: number): Subscription {

@@ -24,6 +24,7 @@ export class TopicDialogComponent implements OnInit {
     this.topicForm = new FormGroup({
       // tslint:disable-next-line
       title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20) ]),
+      introductionHtml: new FormControl('', [Validators.required, Validators.minLength(3)]),
       syntaxHtml: new FormControl('', [Validators.required, Validators.minLength(3)]),
       parametersHtml: new FormControl('', [Validators.required, Validators.minLength(3)]),
       remarksHtml: new FormControl('', [Validators.required, Validators.minLength(3)]),
