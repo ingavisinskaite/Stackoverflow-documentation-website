@@ -1,6 +1,6 @@
 export interface ExamplesData {
-    DocTopicId: number;
-    Title: string;
-    BodyHtml: string;
-    BodyMarkdown: string;
+    docTopicId: number;
+    title: string;
+    bodyHtml: string;
+    bodyMarkdown: string;
 }

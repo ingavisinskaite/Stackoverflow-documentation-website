@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Examples } from '../../models';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { ExamplesDialogComponent } from '../../dialogs';
+import { ExamplesDialogComponent, DeleteExampleDialogComponent } from '../../dialogs';
 import { Injectable } from '@angular/core';
 import { ScrollToService, ScrollToConfigOptions } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEvent } from 'ngx-scroll-event';
@@ -58,7 +58,7 @@ export class TopicComponent implements OnInit {
       });
   }
 
-  public showExampleFormDialog() {
+  public showExampleFormDialog(): void {
     const dialogRef = this._dialog.open(ExamplesDialogComponent, {
       data: { name: 'test', animal: 'dog' }
     });
@@ -66,7 +66,7 @@ export class TopicComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         if (!result) { return; } else {
-          result.DocTopicId = this.topicId;
+          result.docTopicId = this.topicId;
           this._appDataService.addExample(result).subscribe(data => {
             console.log('Inserted example:');
             console.log(data);
@@ -75,7 +75,7 @@ export class TopicComponent implements OnInit {
       });
   }
 
-  public triggerScrollTo() {
+  public triggerScrollTo(): void {
     const config: ScrollToConfigOptions = {
       target: 'top'
     };
@@ -83,7 +83,7 @@ export class TopicComponent implements OnInit {
   }
 
 
-  public handleScroll(event: ScrollEvent) {
+  public handleScroll(event: ScrollEvent): void {
     this.windowScrolled = true;
     if (event.isReachingTop) {
       this.windowScrolled = false;
@@ -106,8 +106,12 @@ export class TopicComponent implements OnInit {
       });
   }
 
-  getHistory() {
+  public getHistory(): void {
     this.showTopicHistories(this.topicId);
+  }
+
+  confirmExampleDelete(exampleId: number): void {
+    this._dialog.open(DeleteExampleDialogComponent, {data: {exampleId}});
   }
 
 }
