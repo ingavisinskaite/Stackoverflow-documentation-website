@@ -10,6 +10,12 @@
         <mat-error *ngIf="topicForm.controls['title'].hasError"> Topic title is invalid </mat-error>
       </mat-form-field >
       <mat-tab-group dynamicHeight  > 
+          <mat-tab label="Introduction Html">
+              <mat-form-field class="textbox" >
+                <textarea matInput placeholder="Introduction Html" formControlName="introductionHtml" required ></textarea>
+                <mat-error *ngIf="topicForm.controls['introductionHtml'].hasError">  Tag is invalid </mat-error>
+              </mat-form-field>
+            </mat-tab>
         <mat-tab label="Syntax Html">
           <mat-form-field class="textbox" >
             <textarea matInput placeholder="Syntax Html" formControlName="syntaxHtml" required ></textarea>
@@ -40,12 +46,12 @@
             <mat-error *ngIf="topicForm.controls['syntaxMarkdown'].hasError"> Tag is invalid </mat-error>
           </mat-form-field>
         </mat-tab>
-        <mat-tab label="Syntax Markdown">
-          <mat-form-field class="textbox" >
-            <textarea matInput placeholder="Parameters Markdown" formControlName="parametersMarkdown" required ></textarea>
-            <mat-error *ngIf="topicForm.controls['parametersMarkdown'].hasError"> Tag is invalid </mat-error>
-          </mat-form-field>
-        </mat-tab>
+        <mat-tab label="Parameters Markdown">
+            <mat-form-field class="textbox" >
+              <textarea matInput placeholder="Parameters Markdown" formControlName="parametersMarkdown" required  ></textarea>
+              <mat-error *ngIf="topicForm.controls['parametersMarkdown'].hasError"> Tag is invalid </mat-error>
+            </mat-form-field>
+          </mat-tab>
         <mat-tab label="Remarks Markdown">
           <mat-form-field class="textbox" >
             <textarea matInput placeholder="Remarks Markdown" formControlName="remarksMarkdown" required ></textarea>
@@ -63,5 +69,6 @@
   </mat-card-content>
     <mat-card-actions align="end">
       <button [disabled]="topicForm.invalid" mat-raised-button class="btn"(click)="submitTopic()" color="primary">Submit</button>
+     
     </mat-card-actions>
 </mat-card>
