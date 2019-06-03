@@ -3,6 +3,8 @@ import { AppDataService } from '../../services/app-data.service';
 import { Subscription } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TopicDialogData } from '../../models';
+import {MatSnackBar, MatSnackBarRef} from '@angular/material';
+import { DeletedComponent } from 'src/app/snackBars/deleted/deleted.component';
 
 
 @Component({
@@ -16,7 +18,8 @@ export class DeleteTopicDialogComponent implements OnInit {
 
   constructor(private _appDataService: AppDataService,
               public dialogRef: MatDialogRef<DeleteTopicDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: TopicDialogData ) { }
+              @Inject(MAT_DIALOG_DATA) public data: TopicDialogData,
+              private _snackBar: MatSnackBar ) { }
 
   ngOnInit() {
     this.downloadTopic(this.data.topicId);
@@ -28,6 +31,7 @@ export class DeleteTopicDialogComponent implements OnInit {
         console.log('Deleted topic:' + data);
       });
     this.closeTopicDeleteDialog();
+    this.openSnackBar();
   }
 
   public downloadTopic(topicId: number): Subscription {
@@ -38,6 +42,12 @@ export class DeleteTopicDialogComponent implements OnInit {
 
   public closeTopicDeleteDialog(): void {
     this.dialogRef.close();
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(DeletedComponent, {
+      verticalPosition: 'top'
+    });
   }
 
 }
