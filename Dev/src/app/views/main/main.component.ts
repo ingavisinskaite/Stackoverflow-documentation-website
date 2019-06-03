@@ -17,6 +17,7 @@ import { DoctagDialogComponent, TopicDialogComponent, DoctagVersionsDialogCompon
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main',
@@ -58,7 +59,8 @@ export class MainComponent implements AfterViewInit, OnInit {
   constructor(private _router: Router,
               private _appDataService: AppDataService,
               private _dialog: MatDialog,
-              private _activatedRoute: ActivatedRoute) {
+              private _activatedRoute: ActivatedRoute,
+              private _titleService: Title) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -72,6 +74,7 @@ export class MainComponent implements AfterViewInit, OnInit {
         const doctagTitle = this._activatedRoute.snapshot.params['doctagTitle'];
         if (doctagTitle) {
           this.selectedDoctagTitle = doctagTitle;
+          this._titleService.setTitle(this.selectedDoctagTitle + ' -Stack Overflow dump');
           const doctagId = this.docTags.find(x => x.Title === doctagTitle).Id;
           this.selectedDoctagId = doctagId;
           this._appDataService.getTopicsCount(doctagId).then(data => {
@@ -132,6 +135,7 @@ export class MainComponent implements AfterViewInit, OnInit {
     this.selectedDoctagId = docTagId;
 
     this.selectedDoctagTitle = this.docTags.find(x => x.Id === docTagId).Title;
+    this._titleService.setTitle(this.selectedDoctagTitle + ' -Stack Overflow dump');
     this._router.navigateByUrl(`${this.selectedDoctagTitle}`);
     this._appDataService.getTopicsCount(docTagId).then(data => {
       this.topicsListLength = data[0].Count;
@@ -149,6 +153,7 @@ export class MainComponent implements AfterViewInit, OnInit {
 
   public navigateToTopic(topicId: string): void {
     this._router.navigateByUrl(`${this.selectedDoctagTitle}/${topicId}`);
+    this._titleService.setTitle(this.selectedDoctagTitle + '/' + topicId + ' -Stack Overflow dump');
   }
 
   public showDoctagVersions(event: any): Promise<DocTagVersions[]> {
