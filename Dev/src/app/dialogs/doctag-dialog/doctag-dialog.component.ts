@@ -47,7 +47,7 @@ export class DoctagDialogComponent implements OnInit {
 
   openSnackBar() {
     this._snackBar.openFromComponent(AddedComponent, {
-      verticalPosition: 'top'
+      duration: 3000
     });
   }
 }

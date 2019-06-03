@@ -37,7 +37,7 @@ export class DeleteExampleDialogComponent implements OnInit {
 
   openSnackBar() {
     this._snackBar.openFromComponent(DeletedComponent, {
-      verticalPosition: 'top'
+      duration: 3000
     });
   }
 

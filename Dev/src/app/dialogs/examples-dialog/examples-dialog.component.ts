@@ -50,7 +50,7 @@ export class ExamplesDialogComponent implements OnInit {
 
   openSnackBar() {
     this._snackBar.openFromComponent(AddedComponent, {
-      verticalPosition: 'top'
+      duration: 3000
     });
   }
 
