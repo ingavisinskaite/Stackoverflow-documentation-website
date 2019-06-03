@@ -35,13 +35,16 @@ import {
   MatAutocompleteModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
+import { DeletedComponent } from './snackBars/deleted/deleted.component';
+import { AddedComponent } from './snackBars/added/added.component';
 
 
 @NgModule({
@@ -57,7 +60,9 @@ import { ScrollEventModule } from 'ngx-scroll-event';
     ExamplesDialogComponent,
     DoctagVersionsDialogComponent,
     DeleteTopicDialogComponent,
-    DeleteExampleDialogComponent
+    DeleteExampleDialogComponent,
+    DeletedComponent,
+    AddedComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +86,8 @@ import { ScrollEventModule } from 'ngx-scroll-event';
     MatProgressSpinnerModule,
     ScrollToModule.forRoot(),
     ScrollEventModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -90,6 +96,8 @@ import { ScrollEventModule } from 'ngx-scroll-event';
                     ExamplesDialogComponent,
                     DoctagVersionsDialogComponent,
                     DeleteTopicDialogComponent,
-                    DeleteExampleDialogComponent]
+                    DeleteExampleDialogComponent,
+                    DeletedComponent,
+                    AddedComponent]
 })
 export class AppModule { }
