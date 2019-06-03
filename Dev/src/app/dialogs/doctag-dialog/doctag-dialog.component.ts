@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {MatSnackBar, MatSnackBarRef} from '@angular/material';
+import { AddedComponent } from 'src/app/snackBars/added/added.component';
 
 @Component({
   selector: 'app-doctag-dialog',
@@ -13,7 +15,8 @@ export class DoctagDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DoctagDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
@@ -32,6 +35,7 @@ export class DoctagDialogComponent implements OnInit {
   public submitDoctag() {
     console.log(this.doctagForm.value);
     this.onNoDoctagFormClick();
+    this.openSnackBar();
   }
 
   onNoDoctagFormClick(): void {
@@ -39,5 +43,11 @@ export class DoctagDialogComponent implements OnInit {
   }
   closeDocDial() {
     this.dialogRef.close();
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(AddedComponent, {
+      duration: 3000
+    });
   }
 }
