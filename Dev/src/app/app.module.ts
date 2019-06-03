@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,7 @@ import {
 
 import { DeletedComponent,
          AddedComponent } from './snackBars';
+import { FormatDatePipe } from './pipes';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -43,7 +45,6 @@ import {
 } from '@angular/material';
 
 
-
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
 
@@ -63,7 +64,8 @@ import { ScrollEventModule } from 'ngx-scroll-event';
     DeleteTopicDialogComponent,
     DeleteExampleDialogComponent,
     DeletedComponent,
-    AddedComponent
+    AddedComponent,
+    FormatDatePipe
   ],
   imports: [
     BrowserModule,

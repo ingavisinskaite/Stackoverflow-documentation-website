@@ -54,7 +54,7 @@
   
         <ng-container matColumnDef="CreationDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
-          <td mat-cell *matCellDef="let element"> {{ toHumanDate(element.CreationDate) }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.CreationDate | formatDate}} </td>
         </ng-container>
   
         <ng-container matColumnDef="ViewCount">
