@@ -5,9 +5,10 @@ var url = require('url');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var databaseCredentials = require('./env');
+var port = require('./port')
 
 app.use(cors({
-  origin: 'http://localhost:4200'
+  origin: port
 }));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({

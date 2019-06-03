@@ -20,6 +20,9 @@ import {
         DeleteTopicDialogComponent,
         DeleteExampleDialogComponent} from './dialogs';
 
+import { DeletedComponent,
+         AddedComponent } from './snackBars';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
@@ -43,8 +46,6 @@ import {
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
-import { DeletedComponent } from './snackBars/deleted/deleted.component';
-import { AddedComponent } from './snackBars/added/added.component';
 
 
 @NgModule({
