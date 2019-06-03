@@ -6,6 +6,7 @@
         cursor: pointer;
         filter: gray;
         -webkit-filter: grayscale(100%);
+        outline: none;
     }
     .image:hover{
         filter: none;
