@@ -40,6 +40,7 @@ import {
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
+import { FooterComponent } from './views/footer/footer.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { ScrollEventModule } from 'ngx-scroll-event';
     LogoComponent,
     ExamplesDialogComponent,
     DoctagVersionsDialogComponent,
-    DeleteTopicDialogComponent
+    DeleteTopicDialogComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

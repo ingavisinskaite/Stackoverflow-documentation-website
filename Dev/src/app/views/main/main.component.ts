@@ -24,7 +24,7 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./main.component.scss']
 })
 
-export class MainComponent implements AfterViewInit, OnInit {
+export class MainComponent implements AfterViewInit, OnInit { // implements - paveldi
 
   docTags: Array<Doctags> = [];
   topics: Array<Topics>;
@@ -54,7 +54,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   color = 'primary';
   mode = 'indeterminate';
   value = 50;
-
+  // dependencies motodos naudojam savo klaseje
   constructor(private _router: Router,
               private _appDataService: AppDataService,
               private _dialog: MatDialog,
