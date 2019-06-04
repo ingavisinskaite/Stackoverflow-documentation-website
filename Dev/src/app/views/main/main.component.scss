@@ -68,7 +68,7 @@
 .add-topic-button {
     max-width: 140px;
     .material-icons {
-        opacity: 0.5;
+        opacity: 1;
         font-size: 18px;
     }
 }
@@ -87,6 +87,11 @@
     }
     .material-icons:hover {
         opacity: 1;
+        color: #3f51b5;
+    }
+    #icon-delete:hover {
+        opacity: 1;
+        color: #f44336;
     }
 
 }

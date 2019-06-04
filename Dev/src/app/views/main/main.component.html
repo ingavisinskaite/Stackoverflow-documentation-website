@@ -30,7 +30,7 @@
 
     <div class="show-doctags-wraper" *ngIf="selectedDoctagId" fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
       <h1 class="selected-topic-h1" fxFlex> {{ this.selectedDoctagTitle }} </h1>
-      <button class="add-topic-button" mat-stroked-button (click)="showTopicFormDialog()" fxFlex><i class="material-icons">add</i>Add Topic</button>
+      <button class="add-topic-button" mat-stroked-button color="primary" (click)="showTopicFormDialog()" fxFlex><i class="material-icons">add</i>Add Topic</button>
       <!-- <div class="show-versions-wrap" fxLayout="row" fxLayoutAlign="end center" fxFlex>
         <button class="show-versions-button" mat-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
         <button class="add-topic-button" mat-stroked-button (click)="showTopicFormDialog()" fxFlex><i class="material-icons">add</i>Add Topic</button>
@@ -65,12 +65,9 @@
         <ng-container matColumnDef="Actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let element">
-            <!-- <button mat-raised-button color="primary"(click)="navigateToTopic(element.Id)">View</button> -->
             <i class="material-icons" (click)="navigateToTopic(element.Id)">visibility</i> 
-            <!-- <button mat-raised-button color="warn">Edit</button> -->
             <i class="material-icons">edit</i>
-            <!-- <button mat-raised-button color=""(click)="confirmTopicDelete()">Delete</button> -->
-            <i class="material-icons" (click)="confirmTopicDelete()">delete</i> 
+            <i class="material-icons" id="icon-delete" (click)="confirmTopicDelete()">delete</i> 
           </td>
         </ng-container>
   

@@ -1,10 +1,27 @@
+// www.npmjs.com turi visokiausius packages, kuriuos reikia instaliuoti norint juos naudoti (npm install x)
+// Package turi visus failus ir funkcijas, kurių reikia, realiai tai yra js libraray.
+// Kai jie instaliuoti, mes čia requirinam visus modulius, kurie reikalingi mūsų API kūrimui.
+// Kaip suprasti, kad "require" yra "module"? Labiau skamba, kaip metodas ar komanda gauti "module"
 const express = require('express');
 const app = express();
+
 var mysql = require('mysql');
 var url = require('url');
+// Inicijuojame kintamąjį "url" kuris turės url modulio savybes, kad galėtume jį parsinti ir iškviesti skirtingas dalis.
+
 var cors = require('cors');
+// Leidžia is skirtingų domeinų/serverių gauti informaciją į vieną puslapį.
+// Mes tai kam naudojame? Kad veiktų localhost1337 ir localhost4200?
+
 var bodyParser = require('body-parser');
-var databaseCredentials = require('./env');
+// Realiai body-parser yra vertėjas, kuris paruošia datą naudojimui. Kai ji keliauja iš vienos vietos į kitą,
+// Ji yra tokenizuojama, gali būti suzipinta ir pan. body-parseris išverčia į žmonių kalbą, kad paprasčiau būtų pasiekti
+
+var databaseCredentials = require('./env'); 
+
+// Kas yra request headers? Objektas turintis papildomą informaciją requeste arba response. Kam tai naudojama? 
+// AR header yra įdėta json data? Kokia dar data yra requeste? IP adress, url? 
+// XMLHttpRequest - ne iki galo suprantu, kas yra XHR ar jis kur nors turi būti aprašomas, ar tai tik objekto tipas?
 
 app.use(cors({
   origin: 'http://localhost:4200'
@@ -13,25 +30,26 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({
   extended: true
 })); // support encoded bodies
+// Kaip app.use čia veikia? Mes pasakome, kad app naudos šiuos dalykus ir jis naudos automatiškai?
 
-app.get('/Doctags', (req, res) => {
-  var con = mysql.createConnection(databaseCredentials);
+app.get('/Doctags', (req, res) => { // O kur requestas? Tipo kreipimasis į mysql?
+  var con = mysql.createConnection(databaseCredentials); // Connection kitur perkeltas ir priskirtas prie kintamojo
 
-  con.connect(function (err) {
+  con.connect(function (err) { // Pirmiausia prisijungaime prie DB
     if (err) throw err;
     console.log('Connected!');
 
 
     con.query("SELECT * FROM doctags ORDER BY Title", function (err, result, fields) {
       if (err) throw err;
-      res.json(
+      res.json( //Tada jamam is DB ir pasakom, kad response iš servero butu json formatas, o duomenys yra result is mysql?
         result
       );
     });
 
-    con.end();
+    con.end(); //Užbaigiame connection, kad netabaluotų. Kas būtų jei neužbaigtume?
   });
-}).listen('1337');
+}).listen('1337'); // Seka 1337 url ir pagal jo parametrus veikia
 
 app.get('/TopicsCount', (req, res) => {
   var con = mysql.createConnection(databaseCredentials);
@@ -40,11 +58,13 @@ app.get('/TopicsCount', (req, res) => {
     if (err) throw err;
     console.log('Connected!');
 
-    let urlParams = url.parse(req.url, true).query;
-    const id = Number(urlParams.id);
+    let urlParams = url.parse(req.url, true).query; 
+    //Naudojam url moduli, imam url iš request, jei false - tai nieko nedarom? Parsinam i formatą, kokį? Suformuojam query?
+    const id = Number(urlParams.id); 
+    //Kintamasis id = skaicius, kuris yra id paimtas is isparsintos data. 
 
     con.query("SELECT COUNT(*) AS 'Count' FROM topics WHERE DocTagId = " + id, function (err, result, fields) {
-      if (err) throw err;
+      if (err) throw err; //Kaip čia tas +id veikia?
 
       res.json(
         result
@@ -70,6 +90,7 @@ app.get('/Topics', (req, res) => {
     const orderBy = urlParams.orderBy;
     const direction = urlParams.direction;
     const filterBy = urlParams.filter;
+    //Iš kur visos šios funkcijos/metodai? 
 
     con.query("SELECT Title, CreationDate, ViewCount, Id FROM topics WHERE DocTagId = " + id + " " +
       "ORDER BY " + orderBy + " " + direction + " " +
@@ -86,7 +107,7 @@ app.get('/Topics', (req, res) => {
   });
 });
 
-app.get('/Topic/:id', (req, res) => {
+app.get('/Topic/:id', (req, res) => { //Čia ieskome konkretaus topico pagal id?
   var con = mysql.createConnection(databaseCredentials);
 
   con.connect(function (err) {
@@ -99,7 +120,7 @@ app.get('/Topic/:id', (req, res) => {
     con.query("SELECT Title FROM topics WHERE Id = " + id + " ", function (err, result, fields) {
       if (err) throw err;
 
-      res.json(result[0]);
+      res.json(result[0]); //Kodėl čia nurodom indexą?
     });
 
     con.end();
@@ -207,14 +228,14 @@ app.get('/Contributors', function (req, res) {
 })
 
 app.post('/Doctags', (req, res) => {
-  const tag = req.body.tag;
+  const tag = req.body.tag; //body parseris paima is duomenu "tag", o kaip duomenys is fronto ateina?
   const name = req.body.name;
 
   var con = mysql.createConnection(databaseCredentials);
 
   const creationDate = new Date().getMilliseconds();
 
-  values = [
+  values = [ //Kas čia vyksta? Kodėl nedeklaruota? Čia variable? 
     [tag,
       name,
       creationDate,
@@ -229,7 +250,7 @@ app.post('/Doctags', (req, res) => {
     console.log(error);
     con.query(query, [values], (err, result) => {
       if (err) {
-        res.json(false);
+        res.json(false); //Kodėl čia šito reikia? Jei erroras, tai false, prie app.getų nedarėm to
         throw err;
       }
       res.json(result);
