@@ -14,6 +14,7 @@ var cors = require('cors');
 // Mes tai kam naudojame? Kad veiktų localhost1337 ir localhost4200?
 
 var bodyParser = require('body-parser');
+<<<<<<< HEAD
 // Realiai body-parser yra vertėjas, kuris paruošia datą naudojimui. Kai ji keliauja iš vienos vietos į kitą,
 // Ji yra tokenizuojama, gali būti suzipinta ir pan. body-parseris išverčia į žmonių kalbą, kad paprasčiau būtų pasiekti
 
@@ -22,9 +23,13 @@ var databaseCredentials = require('./env');
 // Kas yra request headers? Objektas turintis papildomą informaciją requeste arba response. Kam tai naudojama? 
 // AR header yra įdėta json data? Kokia dar data yra requeste? IP adress, url? 
 // XMLHttpRequest - ne iki galo suprantu, kas yra XHR ar jis kur nors turi būti aprašomas, ar tai tik objekto tipas?
+=======
+var databaseCredentials = require('./env');
+var port = require('./port')
+>>>>>>> b6c9898b42211d5cdfdd902641718f5dd865f84f
 
 app.use(cors({
-  origin: 'http://localhost:4200'
+  origin: port
 }));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({
@@ -233,7 +238,7 @@ app.post('/Doctags', (req, res) => {
 
   var con = mysql.createConnection(databaseCredentials);
 
-  const creationDate = new Date().getMilliseconds();
+  const creationDate = '/Date(' + new Date().getTime() + '-0400)/';
 
   values = [ //Kas čia vyksta? Kodėl nedeklaruota? Čia variable? 
     [tag,
@@ -261,6 +266,7 @@ app.post('/Doctags', (req, res) => {
 });
 
 app.post('/Topics', function (req, res) {
+  const introductionHtml = req.body.introductionHtml;
   const syntaxHtml = req.body.syntaxHtml;
   const parametersHtml = req.body.parametersHtml;
   const remarksHtml = req.body.remarksHtml;
@@ -270,10 +276,11 @@ app.post('/Topics', function (req, res) {
   const remarksMarkdown = req.body.remarksMarkdown;
   const helloWorldVersionsHtml = req.body.helloWorldVersionsHtml;
   const title = req.body.title;
+  const doctagId = req.body.docTagId;
 
   const con = mysql.createConnection(databaseCredentials);
 
-  const creationDate = new Date().getMilliseconds();
+  const creationDate = '/Date(' + new Date().getTime() + '-0400)/';
 
   values = [
     [doctagId,
@@ -283,9 +290,11 @@ app.post('/Topics', function (req, res) {
       0,
       null,
       0,
+      null,
       0,
       0,
       0,
+      introductionHtml,
       syntaxHtml,
       parametersHtml,
       remarksHtml,
@@ -297,7 +306,7 @@ app.post('/Topics', function (req, res) {
     ]
   ]
 
-  const query = 'INSERT INTO doctags (Tag, Title, CreationDate, HelloWorldDocTopicId, TopicCount) VALUES ?';
+  const query = 'INSERT INTO topics (DocTagId, IsHelloWorldTopic, Title, CreationDate, ViewCount, LastEditDate, LastEditUserId, LastEditUserDisplayName, ContributorCount, ExampleCount, ExampleScore, IntroductionHtml, SyntaxHtml, ParametersHtml, RemarksHtml, IntroductionMarkdown, SyntaxMarkdown, ParametersMarkdown, RemarksMarkdown, HelloWorldVersionsHtml) VALUES ?';
 
   con.connect((error) => {
     console.log(error);
@@ -313,20 +322,80 @@ app.post('/Topics', function (req, res) {
   });
 })
 
-app.delete('Topics/delete', (req, res) => {
+app.post('/Examples', (req, res) => {
+  const title = req.body.title;
+  const bodyHtml = req.body.bodyHtml;
+  const bodyMarkdown = req.body.bodyMarkdown;
+  const docTopicId = req.body.docTopicId;
+
+  var con = mysql.createConnection(databaseCredentials);
+
+  const creationDate = '/Date(' + new Date().getTime() + '-0400)/';
+
+  values = [
+    [docTopicId,
+      title,
+      creationDate,
+      null,
+      0,
+      0,
+      bodyHtml,
+      bodyMarkdown,
+      false
+    ]
+  ]
+
+  const query = 'INSERT INTO examples (DocTopicId, Title, CreationDate, LastEditDate, Score, ContributorCount, BodyHtml, BodyMarkdown, IsPinned) VALUES ?';
+
+  con.connect((error) => {
+    console.log(error);
+    con.query(query, [values], (err, result) => {
+      if (err) {
+        res.json(false);
+        throw err;
+      }
+      res.json(result);
+    });
+
+    con.end();
+  });
+});
+
+app.delete('/deleteTopic/:id', (req, res) => {
   const con = mysql.createConnection(databaseCredentials);
+  const topicId = Number(req.params.id);
+  console.log(topicId);
 
   con.connect(function (err) {
     if (err) throw err;
     console.log('Connected!');
 
-    const topicId = Number(req.body.id);
-    console.log(id);
-
     con.query('DELETE FROM topics WHERE Id = ' + topicId, function (err, result, fields) {
-      if (err) throw err;
+      if (err) {
+        res.json(false);
+        throw err;
+      }
+      console.log('Successfully deleted');
+    });
 
-      console.log('Successfully deleted')
+    con.end();
+  })
+})
+
+app.delete('/deleteExample/:id', (req, res) => {
+  const con = mysql.createConnection(databaseCredentials);
+  const exampleId = Number(req.params.id);
+
+  con.connect(function (err) {
+    if (err) throw err;
+    console.log('Connected!');
+
+    con.query('DELETE FROM examples WHERE Id = ' + exampleId, function (err, result, fields) {
+      if (err) {
+        res.json(false);
+        throw err;
+      }
+      console.log('Successfully deleted');
     });
 
     con.end();

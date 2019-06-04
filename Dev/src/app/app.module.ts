@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +18,12 @@ import {
         TopicDialogComponent,
         DoctagDialogComponent,
         DoctagVersionsDialogComponent,
-        DeleteTopicDialogComponent} from './dialogs';
+        DeleteTopicDialogComponent,
+        DeleteExampleDialogComponent} from './dialogs';
+
+import { DeletedComponent,
+         AddedComponent } from './snackBars';
+import { FormatDatePipe } from './pipes';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -34,14 +40,14 @@ import {
   MatAutocompleteModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSnackBarModule
 } from '@angular/material';
-
 
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
-import { DeleteExampleDialogComponent } from './dialogs/delete-example-dialog/delete-example-dialog.component';
+import { FooterComponent } from './views/footer/footer.component';
 
 
 @NgModule({
@@ -57,7 +63,11 @@ import { DeleteExampleDialogComponent } from './dialogs/delete-example-dialog/de
     ExamplesDialogComponent,
     DoctagVersionsDialogComponent,
     DeleteTopicDialogComponent,
-    DeleteExampleDialogComponent
+    DeleteExampleDialogComponent,
+    DeletedComponent,
+    AddedComponent,
+    FormatDatePipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +91,8 @@ import { DeleteExampleDialogComponent } from './dialogs/delete-example-dialog/de
     MatProgressSpinnerModule,
     ScrollToModule.forRoot(),
     ScrollEventModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -89,6 +100,9 @@ import { DeleteExampleDialogComponent } from './dialogs/delete-example-dialog/de
                     TopicDialogComponent,
                     ExamplesDialogComponent,
                     DoctagVersionsDialogComponent,
-                    DeleteTopicDialogComponent]
+                    DeleteTopicDialogComponent,
+                    DeleteExampleDialogComponent,
+                    DeletedComponent,
+                    AddedComponent]
 })
 export class AppModule { }

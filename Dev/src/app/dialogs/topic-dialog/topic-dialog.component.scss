@@ -50,5 +50,10 @@ form {
   position: absolute;
 }
 ::ng-deep textarea.mat-input-element{
-  height: 62vh;
+  height: 55vh;
+  background-color: whitesmoke;
+}
+.textbox{
+  width: 80vw;
+  padding: 10px;
 }

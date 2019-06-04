@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="space-around center">
+<div class="main" fxLayout="column" fxLayoutAlign="space-around center">
 
     <div class="search-bar-wraper" fxLayout="row" fxLayoutAlign="center center" fxFlex>
       <form class="example-form" >
@@ -41,7 +41,7 @@
     <!-- <mat-form-field class="filter-form" *ngIf="selectedDoctagId" fxFlex>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field> -->
-  
+    
     <div class="table-wrap" fxLayout="column" fxLayoutAlign=" stretch" fxFlex>
       
       <table mat-table [dataSource]="topics" matSort matSortActive="Title" matSortDirection="asc" matSortDisableClear
@@ -54,7 +54,7 @@
   
         <ng-container matColumnDef="CreationDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation Date </th>
-          <td mat-cell *matCellDef="let element"> {{ toHumanDate(element.CreationDate) }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.CreationDate | formatDate}} </td>
         </ng-container>
   
         <ng-container matColumnDef="ViewCount">
@@ -67,7 +67,12 @@
           <td mat-cell *matCellDef="let element">
             <i class="material-icons" (click)="navigateToTopic(element.Id)">visibility</i> 
             <i class="material-icons">edit</i>
+<<<<<<< HEAD
             <i class="material-icons" id="icon-delete" (click)="confirmTopicDelete()">delete</i> 
+=======
+            <!-- <button mat-raised-button color=""(click)="confirmTopicDelete()">Delete</button> -->
+            <i class="material-icons" (click)="confirmTopicDelete(element.Id)">delete</i> 
+>>>>>>> b6c9898b42211d5cdfdd902641718f5dd865f84f
           </td>
         </ng-container>
   
@@ -81,5 +86,4 @@
         (page)="topicsPageEvent = onTopicsPageChange($event)" fxFlex></mat-paginator>
 
     </div>
-  
   </div>

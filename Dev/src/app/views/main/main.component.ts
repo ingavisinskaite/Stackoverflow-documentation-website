@@ -17,6 +17,7 @@ import { DoctagDialogComponent, TopicDialogComponent, DoctagVersionsDialogCompon
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main',
@@ -24,7 +25,7 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./main.component.scss']
 })
 
-export class MainComponent implements AfterViewInit, OnInit {
+export class MainComponent implements AfterViewInit, OnInit { // implements - paveldi
 
   docTags: Array<Doctags> = [];
   topics: Array<Topics>;
@@ -54,11 +55,12 @@ export class MainComponent implements AfterViewInit, OnInit {
   color = 'primary';
   mode = 'indeterminate';
   value = 50;
-
+  // dependencies motodos naudojam savo klaseje
   constructor(private _router: Router,
               private _appDataService: AppDataService,
               private _dialog: MatDialog,
-              private _activatedRoute: ActivatedRoute) {
+              private _activatedRoute: ActivatedRoute,
+              private _titleService: Title) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -72,6 +74,7 @@ export class MainComponent implements AfterViewInit, OnInit {
         const doctagTitle = this._activatedRoute.snapshot.params['doctagTitle'];
         if (doctagTitle) {
           this.selectedDoctagTitle = doctagTitle;
+          this._titleService.setTitle(this.selectedDoctagTitle + ' -Stack Overflow dump');
           const doctagId = this.docTags.find(x => x.Title === doctagTitle).Id;
           this.selectedDoctagId = doctagId;
           this._appDataService.getTopicsCount(doctagId).then(data => {
@@ -132,6 +135,7 @@ export class MainComponent implements AfterViewInit, OnInit {
     this.selectedDoctagId = docTagId;
 
     this.selectedDoctagTitle = this.docTags.find(x => x.Id === docTagId).Title;
+    this._titleService.setTitle(this.selectedDoctagTitle + ' -Stack Overflow dump');
     this._router.navigateByUrl(`${this.selectedDoctagTitle}`);
     this._appDataService.getTopicsCount(docTagId).then(data => {
       this.topicsListLength = data[0].Count;
@@ -149,6 +153,7 @@ export class MainComponent implements AfterViewInit, OnInit {
 
   public navigateToTopic(topicId: string): void {
     this._router.navigateByUrl(`${this.selectedDoctagTitle}/${topicId}`);
+    this._titleService.setTitle(this.selectedDoctagTitle + '/' + topicId + ' -Stack Overflow dump');
   }
 
   public showDoctagVersions(event: any): Promise<DocTagVersions[]> {
@@ -189,9 +194,12 @@ export class MainComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         if (!result) { return; } else {
-          this._appDataService.addTopic(result).subscribe(data => {
+          result.docTagId = this.selectedDoctagId;
+          this._appDataService.addTopic(result)
+            .subscribe(data => {
             console.log('Inserted topic:');
             console.log(data);
+            // 
           });
         }
       });
@@ -201,12 +209,12 @@ export class MainComponent implements AfterViewInit, OnInit {
     this._dialog.open(DoctagVersionsDialogComponent, {data: event});
   }
 
-  public confirmTopicDelete(): void{
-    this._dialog.open(DeleteTopicDialogComponent, {data: event});
+  public confirmTopicDelete(topicId: number): void{
+    this._dialog.open(DeleteTopicDialogComponent, {data: {topicId}});
   }
 
   public toHumanDate(date: string): Date {
-    if (!date) { return; }
+    if (!date || date.length < 10) { return; }
     const partOne = date.split('(')[1];
     const partTwo = Number(partOne.split('-')[0]);
     const dateObj = new Date(partTwo);

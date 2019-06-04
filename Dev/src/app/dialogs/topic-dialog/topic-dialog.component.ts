@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {MatSnackBar, MatSnackBarRef} from '@angular/material';
+import { AddedComponent } from 'src/app/snackBars/added/added.component';
 
 @Component({
   selector: 'app-topic-dialog',
@@ -13,7 +15,8 @@ export class TopicDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<TopicDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
@@ -24,6 +27,7 @@ export class TopicDialogComponent implements OnInit {
     this.topicForm = new FormGroup({
       // tslint:disable-next-line
       title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20) ]),
+      introductionHtml: new FormControl('', [Validators.required, Validators.minLength(3)]),
       syntaxHtml: new FormControl('', [Validators.required, Validators.minLength(3)]),
       parametersHtml: new FormControl('', [Validators.required, Validators.minLength(3)]),
       remarksHtml: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -38,6 +42,7 @@ export class TopicDialogComponent implements OnInit {
   public submitTopic() {
     console.log(this.topicForm.value);
     this.onNoTopicFormClick();
+    this.openSnackBar();
   }
 
   onNoTopicFormClick(): void {
@@ -45,6 +50,12 @@ export class TopicDialogComponent implements OnInit {
   }
   closeTopicDial() {
     this.dialogRef.close();
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(AddedComponent, {
+      duration: 3000
+    });
   }
 
 }
