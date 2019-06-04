@@ -67,12 +67,9 @@
           <td mat-cell *matCellDef="let element">
             <i class="material-icons" (click)="navigateToTopic(element.Id)">visibility</i> 
             <i class="material-icons">edit</i>
-<<<<<<< HEAD
             <i class="material-icons" id="icon-delete" (click)="confirmTopicDelete()">delete</i> 
-=======
             <!-- <button mat-raised-button color=""(click)="confirmTopicDelete()">Delete</button> -->
             <i class="material-icons" (click)="confirmTopicDelete(element.Id)">delete</i> 
->>>>>>> b6c9898b42211d5cdfdd902641718f5dd865f84f
           </td>
         </ng-container>
   
