@@ -47,6 +47,7 @@ import {
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
+import { FooterComponent } from './views/footer/footer.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { ScrollEventModule } from 'ngx-scroll-event';
     DeleteExampleDialogComponent,
     DeletedComponent,
     AddedComponent,
-    FormatDatePipe
+    FormatDatePipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

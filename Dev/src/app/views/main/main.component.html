@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="space-around center">
+<div class="main" fxLayout="column" fxLayoutAlign="space-around center">
 
     <div class="search-bar-wraper" fxLayout="row" fxLayoutAlign="center center" fxFlex>
       <form class="example-form" >
@@ -41,7 +41,7 @@
     <!-- <mat-form-field class="filter-form" *ngIf="selectedDoctagId" fxFlex>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field> -->
-  
+    
     <div class="table-wrap" fxLayout="column" fxLayoutAlign=" stretch" fxFlex>
       
       <table mat-table [dataSource]="topics" matSort matSortActive="Title" matSortDirection="asc" matSortDisableClear
@@ -84,5 +84,4 @@
         (page)="topicsPageEvent = onTopicsPageChange($event)" fxFlex></mat-paginator>
 
     </div>
-  
   </div>
