@@ -9,25 +9,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-#main {
-  flex: 1;
-}
-footer {
-  // pause: 1000ms;
-  background-color: #242729;
-  height: 130px;
-  color: white;
-  width: 100%;
-  text-align: center;
-  position: relative !important;
-  span {
-      display: block;
-  }
-  svg {
-      padding: 15px;
-      cursor: pointer;
-  }
-}
+
 
 // .app-loading {
 //   position: relative;
