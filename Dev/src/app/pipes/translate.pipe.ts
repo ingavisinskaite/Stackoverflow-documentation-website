@@ -10,13 +10,9 @@ export class TranslatePipe implements PipeTransform {
 
     transform(el: string): any {
         this._trans.getLocalStorageLang();
-        console.log(el);
         const transArray = Object.keys(this._trans.lang);
         const valueArray = Object.values(this._trans.lang);
-        console.log(valueArray);
-        console.log(transArray);
         const positionOfElement = transArray.indexOf(el);
-        console.log(positionOfElement);
         return valueArray[positionOfElement];
     }
 }

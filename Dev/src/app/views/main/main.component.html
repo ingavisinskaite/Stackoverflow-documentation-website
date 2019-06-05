@@ -4,7 +4,7 @@
       <form class="example-form" >
         <mat-form-field class="search-bar" appearance="outline">
             <span matPrefix><i class="material-icons">search</i></span>
-          <input type="text" placeholder="Search for Topics" aria-label="Doctags" matInput [formControl]="myControl"
+          <input type="text" placeholder="{{'search' | translate }}" aria-label="Doctags" matInput [formControl]="myControl"
             [matAutocomplete]="auto" fxFlex>
           <mat-autocomplete (optionSelected)="showTopic($event)" #auto="matAutocomplete" [displayWith]="displayFn">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
