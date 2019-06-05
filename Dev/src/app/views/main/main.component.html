@@ -13,7 +13,7 @@
           </mat-autocomplete>
         </mat-form-field>
       </form>
-      <button class="add-doctag-button" mat-flat-button color="primary" (click)="showDoctagFormDialog()" fxFlex><i class="material-icons">add</i>Add Doctag</button>
+      <button class="add-doctag-button" mat-flat-button color="primary" (click)="showDoctagFormDialog()" fxFlex><i class="material-icons">add</i>{{'addDoctag' | translate}}</button>
     </div>
   
     <div class="hero-wrap" fxLayout="column" fxLayoutAlign="space-between center" fxFlex>
@@ -23,6 +23,8 @@
           Future of programming on this planet depends on you my friend. Generations 
           of newbies will be forever grateful and praise your name.</p>
           <p>{{ 'selectedDoctagTitle' | translate }}</p>
+          <button (click)="changeLang('EN')">EN</button>
+          <button (click)="changeLang('LT')">LT</button>
       </div>
       <div class="hero-image" *ngIf="!selectedDoctagId" fxFlex>
         <img src="../../../assets/power.svg" alt="">
@@ -31,7 +33,7 @@
 
     <div class="show-doctags-wraper" *ngIf="selectedDoctagId" fxLayout="row" fxLayoutAlign="space-between center" fxFlex>
       <h1 class="selected-topic-h1" fxFlex> {{ this.selectedDoctagTitle }} </h1>
-      <button class="add-topic-button" mat-stroked-button (click)="showTopicFormDialog()" fxFlex><i class="material-icons">add</i>Add Topic</button>
+      <button class="add-topic-button" mat-stroked-button (click)="showTopicFormDialog()" fxFlex><i class="material-icons">add</i>{{'addTopic' | translate}}</button>
       <!-- <div class="show-versions-wrap" fxLayout="row" fxLayoutAlign="end center" fxFlex>
         <button class="show-versions-button" mat-button (click)="openDoctagversionsDialog(selectedDoctagId)" fxFlex>Show Versions</button>
         <button class="add-topic-button" mat-stroked-button (click)="showTopicFormDialog()" fxFlex><i class="material-icons">add</i>Add Topic</button>

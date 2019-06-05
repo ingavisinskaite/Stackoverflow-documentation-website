@@ -22,6 +22,7 @@ import { en, lt } from '../../assets/locale';
     }
 
     public set lang(lang: any) {
+        this.selectedLang = lang;
         localStorage.setItem('codeBakers_lang', lang);
     }
 

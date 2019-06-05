@@ -1,3 +1,4 @@
+import { TranslationService } from './../../services/translation.service';
 import {
   TopicHistories,
   TopicHistoryTypes,
@@ -9,7 +10,7 @@ import {
   ContributorDeletionReasons,
   Contributors
 } from '../../models';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/material';
 import { AppDataService } from '../../services/app-data.service';
@@ -60,7 +61,8 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
               private _appDataService: AppDataService,
               private _dialog: MatDialog,
               private _activatedRoute: ActivatedRoute,
-              private _titleService: Title) {
+              private _titleService: Title,
+              public _trans: TranslationService) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -219,6 +221,10 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
     const partTwo = Number(partOne.split('-')[0]);
     const dateObj = new Date(partTwo);
     return dateObj;
+  }
+
+  changeLang(lang: string) {
+    this._trans.lang = lang;
   }
 
 }
