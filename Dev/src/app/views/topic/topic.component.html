@@ -1,6 +1,5 @@
 <ng-template #loading>
   <mat-progress-spinner class="loading" [color]="color" [mode]="mode" [value]="value"></mat-progress-spinner>
-  <div id="blanc"></div>
 </ng-template>
 
 <div class="container" *ngIf="examples else loading" detect-scroll (onScroll)="handleScroll($event)">
