@@ -47,9 +47,12 @@ import {
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
+<<<<<<< HEAD
 import { FooterComponent } from './views/footer/footer.component';
 import { TranslationService } from './services';
 
+=======
+>>>>>>> 75663f2c24290771aede82b9653c353a0adf75d1
 
 @NgModule({
   declarations: [
@@ -67,9 +70,13 @@ import { TranslationService } from './services';
     DeleteExampleDialogComponent,
     DeletedComponent,
     AddedComponent,
+<<<<<<< HEAD
     FormatDatePipe,
     FooterComponent,
     TranslatePipe
+=======
+    FormatDatePipe
+>>>>>>> 75663f2c24290771aede82b9653c353a0adf75d1
   ],
   imports: [
     BrowserModule,
