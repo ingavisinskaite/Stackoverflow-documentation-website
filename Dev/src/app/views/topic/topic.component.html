@@ -4,7 +4,7 @@
 
 <div class="container" *ngIf="examples else loading" detect-scroll (onScroll)="handleScroll($event)">
 
-    <h1 cl  ass="topicTitle" id="top">{{topicTitle}}</h1>
+    <h1 class="topicTitle" id="top">{{topicTitle}}</h1>
     <mat-tab-group mat-stretch-tabs (selectedTabChange)="getHistory($event)">
       <mat-tab label="Examples">
         <mat-accordion *ngFor="let example of examples">
