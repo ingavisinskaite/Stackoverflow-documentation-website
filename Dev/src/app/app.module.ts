@@ -23,7 +23,7 @@ import {
 
 import { DeletedComponent,
          AddedComponent } from './snackBars';
-import { FormatDatePipe } from './pipes';
+import { FormatDatePipe, TranslatePipe } from './pipes';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -48,6 +48,7 @@ import {
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { FooterComponent } from './views/footer/footer.component';
+import { TranslationService } from './services';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { FooterComponent } from './views/footer/footer.component';
     DeletedComponent,
     AddedComponent,
     FormatDatePipe,
-    FooterComponent
+    FooterComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,
@@ -94,7 +96,7 @@ import { FooterComponent } from './views/footer/footer.component';
     MatTabsModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [TranslationService],
   bootstrap: [AppComponent],
   entryComponents: [DoctagDialogComponent,
                     TopicDialogComponent,

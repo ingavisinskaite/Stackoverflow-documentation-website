@@ -22,6 +22,7 @@
         <p>Search, edit, and add to the biggest documentation library in the world!<br><br>
           Future of programming on this planet depends on you my friend. Generations 
           of newbies will be forever grateful and praise your name.</p>
+          <p>{{ 'selectedDoctagTitle' | translate }}</p>
       </div>
       <div class="hero-image" *ngIf="!selectedDoctagId" fxFlex>
         <img src="../../../assets/power.svg" alt="">
@@ -42,7 +43,7 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field> -->
     
-    <div class="table-wrap" fxLayout="column" fxLayoutAlign=" stretch" fxFlex>
+    <div class="table-wrap" fxLayout="column" fxLayoutAlign=" stretch" fxFlex >
       
       <table mat-table [dataSource]="topics" matSort matSortActive="Title" matSortDirection="asc" matSortDisableClear
         class="mat-elevation-z8" [ngClass]="topics ? 'visible': 'hidden'" fxFlex>

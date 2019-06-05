@@ -13,7 +13,7 @@
   min-height: 794px;
 }
 
-::ng-deep .mat-expansion-panel-content {
+::ng-deep .mat-expansion-panel-content {  
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 1.1em;
 }
@@ -38,6 +38,10 @@ mat-expansion-panel {
 ::ng-deep .mat-expansion-panel-header:hover,
 ::ng-deep .mat-expansion-panel-header:focus {
   background-color: #3f51b5 !important;
+}
+
+::ng-deep .mat-expansion-panel-body:focus {
+  outline: none;
 }
 
 ::ng-deep code {

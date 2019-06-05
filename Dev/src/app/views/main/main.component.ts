@@ -11,13 +11,13 @@ import {
 } from '../../models';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
+import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/material';
 import { AppDataService } from '../../services/app-data.service';
 import { DoctagDialogComponent, TopicDialogComponent, DoctagVersionsDialogComponent, DeleteTopicDialogComponent } from '../../dialogs';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import {Title} from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main',
