@@ -22,23 +22,12 @@ export class DeleteExampleDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-<<<<<<< HEAD
   // public deleteExample(id: number): void {
   //   this._appDataService.deleteExample(id)
   //     .then(data => {
   //       console.log('Deleted topic:' + data);
   //     });
   // }
-=======
-  public deleteExample(id: number): void {
-    this._appDataService.deleteExample(id)
-      .then(data => {
-        console.log('Deleted example' + data);
-      });
-    this.closeExampleDeleteDialog();
-    this.openSnackBar();
-  }
->>>>>>> b6c9898b42211d5cdfdd902641718f5dd865f84f
 
   public closeExampleDeleteDialog(): void {
     this.dialogRef.close();

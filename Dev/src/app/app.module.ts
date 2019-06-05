@@ -1,3 +1,4 @@
+import { TranslationService } from './services/translation.service';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -48,6 +49,9 @@ import {
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { FooterComponent } from './views/footer/footer.component';
+import { EditExampleComponent } from './dialogs/edit-example/edit-example.component';
+import { EditExampleDialogComponent } from './dialogs/edit-example-dialog/edit-example-dialog.component';
+import { EditedComponent } from './snackBars/edited/edited.component';
 
 
 @NgModule({
@@ -67,7 +71,10 @@ import { FooterComponent } from './views/footer/footer.component';
     DeletedComponent,
     AddedComponent,
     FormatDatePipe,
-    FooterComponent
+    FooterComponent,
+    EditExampleComponent,
+    EditExampleDialogComponent,
+    EditedComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +101,7 @@ import { FooterComponent } from './views/footer/footer.component';
     MatTabsModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [TranslationService],
   bootstrap: [AppComponent],
   entryComponents: [DoctagDialogComponent,
                     TopicDialogComponent,

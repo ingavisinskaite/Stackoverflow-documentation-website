@@ -1,3 +1,4 @@
+import { TranslationService } from './../../services/translation.service';
 import {
   TopicHistories,
   TopicHistoryTypes,
@@ -60,7 +61,8 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
               private _appDataService: AppDataService,
               private _dialog: MatDialog,
               private _activatedRoute: ActivatedRoute,
-              private _titleService: Title) {
+              private _titleService: Title,
+              public _trans: TranslationService) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
