@@ -108,8 +108,16 @@ tr {
 
 .langs {
     margin-top: 5px;
+    width: 100vw;
+}
+
+.langEn {
+    float: right;
+    margin-left: 5px;
+    margin-right: 20px;
 }
 
 .langLt {
     margin-left: 5px;
+    float: right;
 }
