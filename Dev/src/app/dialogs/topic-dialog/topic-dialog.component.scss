@@ -31,10 +31,11 @@ form {
 ::ng-deep .mat-dialog-container{
   padding: 0;
   overflow: inherit;
+  width: 90%
 }
 .mat-card{
-  width: 100%;
- min-height: 90vh;
+  width:100%;
+  min-height: 90vh;
   overflow: hidden;
 }
 ::ng-deep .mat-form-field-infix{
@@ -58,4 +59,8 @@ form {
 .textbox{
   width: 80vw;
   padding: 10px;
+}
+
+::ng-deep textarea.mat-input-element {
+  width: 90%;
 }
