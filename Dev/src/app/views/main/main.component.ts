@@ -201,7 +201,7 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
             .subscribe(data => {
             console.log('Inserted topic:');
             console.log(data);
-            // 
+            //
           });
         }
       });
