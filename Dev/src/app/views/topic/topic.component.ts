@@ -30,14 +30,14 @@ export class TopicComponent implements OnInit {
 
   windowScrolled = false;
 
-  constructor(private _activatedRoute: ActivatedRoute,
+  constructor(private _activatedRoute: ActivatedRoute, // angular service
     private _appDataService: AppDataService,
-    private _dialog: MatDialog,
+    private _dialog: MatDialog, // service to opne material design
     private _scrollToService: ScrollToService) {
   }
 
   ngOnInit() {
-    this.topicId = this._activatedRoute.snapshot.params['topicId'];
+    this.topicId = this._activatedRoute.snapshot.params.topicId;
     this.downloadTopic(this.topicId);
     this.downloadExamples(this.topicId);
     window.scrollTo(0, 0);
