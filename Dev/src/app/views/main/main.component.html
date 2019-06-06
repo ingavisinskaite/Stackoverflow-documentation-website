@@ -84,7 +84,8 @@
   
       <mat-paginator *ngIf="selectedDoctagId" [length]="topicsListLength" [pageSize]="topicsPageSize"
         [pageIndex]="topicsPageIndex" [pageSizeOptions]="topicsPageSizeOptions"
-        (page)="topicsPageEvent = onTopicsPageChange($event)" fxFlex></mat-paginator>
+        (page)="topicsPageEvent = onTopicsPageChange($event)" fxFlex>
+      </mat-paginator>
 
     </div>
   </div>

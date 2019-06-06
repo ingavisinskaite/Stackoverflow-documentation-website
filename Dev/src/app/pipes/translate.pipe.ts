@@ -9,7 +9,6 @@ export class TranslatePipe implements PipeTransform {
     constructor(public _trans: TranslationService) { }
 
     transform(el: string): any {
-        this._trans.getLocalStorageLang();
         const transArray = Object.keys(this._trans.lang);
         const valueArray = Object.values(this._trans.lang);
         const positionOfElement = transArray.indexOf(el);
