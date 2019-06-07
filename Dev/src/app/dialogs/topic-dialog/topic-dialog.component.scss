@@ -35,7 +35,7 @@ form {
 }
 .mat-card{
   width:100%;
-  min-height: 90vh;
+  min-height: 87vh;
   overflow: hidden;
 }
 ::ng-deep .mat-form-field-infix{
@@ -47,10 +47,7 @@ form {
  .mat-form-field{
   width: 200px;
 }
-.btn{
-  position: absolute;
-  bottom: 35px;
-}
+
 ::ng-deep textarea.mat-input-element{
  max-height: 55vh;
  min-height: 50vh;
@@ -63,4 +60,12 @@ form {
 
 ::ng-deep textarea.mat-input-element {
   width: 90%;
+}
+.card{
+  padding: 0;
+  margin: 0 !important;
+}
+
+ .mat-card-content{
+  margin: 0;
 }
