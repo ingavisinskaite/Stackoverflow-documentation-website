@@ -19,6 +19,8 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
+import {MatSnackBar} from '@angular/material';
+import { DeletedComponent } from 'src/app/snackBars/deleted/deleted.component';
 
 @Component({
   selector: 'app-main',
@@ -62,7 +64,8 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
               private _dialog: MatDialog,
               private _activatedRoute: ActivatedRoute,
               private _titleService: Title,
-              public _trans: TranslationService) {
+              public _trans: TranslationService,
+              private _snackBar: MatSnackBar) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -215,6 +218,13 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
     this._dialog.open(DeleteTopicDialogComponent, {data: {topicId}});
   }
 
+  public deleteTopic(topicId: number) {
+    this._appDataService.deleteTopic(topicId)
+      .then(data => {
+        console.log('Deleted topic:' + data);
+      });
+  }
+
   public toHumanDate(date: string): Date {
     if (!date || date.length < 10) { return; }
     const partOne = date.split('(')[1];
@@ -225,6 +235,22 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
 
   changeLang(lang: string) {
     this._trans.lang = lang;
+  }
+
+  holdHandler(e: number, topicId: number) {
+    console.log(e);
+    if (e > 3000) {
+      this.deleteTopic(topicId);
+      this.openSnackBar();
+    } else {
+      return;
+    }
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(DeletedComponent, {
+      duration: 3000
+    });
   }
 
 }

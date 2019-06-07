@@ -3,7 +3,7 @@ import { AppDataService } from '../../services/app-data.service';
 import { Subscription } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TopicDialogData } from '../../models';
-import {MatSnackBar, MatSnackBarRef} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import { DeletedComponent } from 'src/app/snackBars/deleted/deleted.component';
 
 
