@@ -20,7 +20,8 @@ import {
         DoctagDialogComponent,
         DoctagVersionsDialogComponent,
         DeleteTopicDialogComponent,
-        DeleteExampleDialogComponent} from './dialogs';
+        DeleteExampleDialogComponent,
+        EditExampleDialogComponent } from './dialogs';
 
 import { DeletedComponent,
          AddedComponent } from './snackBars';
@@ -48,7 +49,6 @@ import {
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
-import { EditExampleDialogComponent } from './dialogs/edit-example-dialog/edit-example-dialog.component';
 import { EditedComponent } from './snackBars/edited/edited.component';
 
 
@@ -69,8 +69,6 @@ import { EditedComponent } from './snackBars/edited/edited.component';
     DeletedComponent,
     AddedComponent,
     FormatDatePipe,
-    FooterComponent,
-    EditExampleComponent,
     EditExampleDialogComponent,
     EditedComponent
   ],
@@ -108,6 +106,8 @@ import { EditedComponent } from './snackBars/edited/edited.component';
                     DeleteTopicDialogComponent,
                     DeleteExampleDialogComponent,
                     DeletedComponent,
-                    AddedComponent]
+                    EditExampleDialogComponent,
+                    AddedComponent,
+                    EditedComponent]
 })
 export class AppModule { }

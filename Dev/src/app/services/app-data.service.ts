@@ -6,7 +6,8 @@ import {  TopicHistories,
   Topics,
   Contributors,
   TopicsData,
-  ExamplesData} from '../models';
+  ExamplesData,
+  EditExampleData } from '../models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -81,6 +82,11 @@ export class AppDataService {
   public deleteExample(exampleId: number): Promise<Array<Examples>> {
     const url = 'http://localhost:1337/deleteExample/' + exampleId;
     return this._http.delete<Array<Examples>>(url).toPromise();
+  }
+
+  public editExample(exampleId: number, data: EditExampleData) {
+    const url = 'http://localhost:1337/editExample/' + exampleId;
+    return this._http.put<any>(url, data);
   }
 
 }

@@ -119,7 +119,7 @@ app.get('/Examples', (req, res) => {
     let urlParams = url.parse(req.url, true).query;
     const id = Number(urlParams.id);
 
-    con.query("SELECT Id, Title, BodyHtml FROM examples WHERE DocTopicId = " + id, function (err, result, fields) {
+    con.query("SELECT Id, Title, BodyHtml, BodyMarkdown FROM examples WHERE DocTopicId = " + id, function (err, result, fields) {
       if (err) throw err;
 
       res.json(
@@ -336,9 +336,9 @@ app.post('/Examples', (req, res) => {
   });
 });
 
-app.delete('/deleteTopic/:id', (req, res) => {
+app.delete('/deleteTopic/:id', (req, res) => { //Pavyzdys
   const con = mysql.createConnection(databaseCredentials);
-  const topicId = Number(req.params.id);
+  const topicId = Number(req.params.id); //Pas mane 4 tik dasideti values, kaip insertinant dariau
   console.log(topicId);
 
   con.connect(function (err) {
@@ -371,6 +371,30 @@ app.delete('/deleteExample/:id', (req, res) => {
         throw err;
       }
       console.log('Successfully deleted');
+    });
+
+    con.end();
+  })
+})
+
+app.put('/editExample/:id', (req, res) => {
+  const con = mysql.createConnection(databaseCredentials);
+  const exampleId = Number(req.params.id);
+  const title = req.body.title;
+  const bodyHtml = req.body.bodyHtml;
+  const bodyMarkdown = req.body.bodyMarkdown;
+  
+  const query = 'UPDATE examples SET Title=?, BodyHtml=?, BodyMarkdown=? WHERE Id = ' + exampleId;
+
+  con.connect((error) => {
+    console.log(error);
+    con.query(query, [title, bodyHtml, bodyMarkdown], (err, result) => {
+      if (err) {
+        res.json(false);
+        throw err;
+      }
+      res.json(result);
+      console.log('Successfully edited');
     });
 
     con.end();

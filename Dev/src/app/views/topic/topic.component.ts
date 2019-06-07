@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Examples } from '../../models';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { ExamplesDialogComponent, DeleteExampleDialogComponent } from '../../dialogs';
+import { ExamplesDialogComponent, DeleteExampleDialogComponent, EditExampleDialogComponent } from '../../dialogs';
 import { Injectable } from '@angular/core';
 import { ScrollToService, ScrollToConfigOptions } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEvent } from 'ngx-scroll-event';
@@ -20,6 +20,7 @@ export class TopicComponent implements OnInit {
   examples: Array<Examples>;
   topicTitle: string;
   topicId: number;
+  exampleId: number;
   panelOpenState = false;
   firstExampleId: number;
   topicHistories: string;
@@ -111,7 +112,23 @@ export class TopicComponent implements OnInit {
   }
 
   confirmExampleDelete(exampleId: number): void {
-    this._dialog.open(DeleteExampleDialogComponent, {data: {exampleId}});
+    this._dialog.open(DeleteExampleDialogComponent, { data: { exampleId } });
+  }
+
+  public editExamples(exampleId: number, exampleTitle: string, exampleBody: string, exampleMarkdown: string): void {
+    const dialogRef = this._dialog.open(EditExampleDialogComponent,
+      { data: { exampleId, exampleTitle, exampleBody, exampleMarkdown } });
+
+    console.log(exampleId);
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if (!result) { return; } else {
+          this._appDataService.editExample(exampleId, result).subscribe(data => {
+            console.log('Example edited:');
+            console.log(data);
+          });
+        }
+      });
   }
 
 }

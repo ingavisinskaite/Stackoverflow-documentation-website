@@ -18,13 +18,13 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div [innerHTML]="example.BodyHtml"></div>
-            <i class="material-icons deleteExample" (click)="confirmExampleDelete(example.Id)">delete</i> 
+            <i class="material-icons deleteExample" (click)="confirmExampleDelete(example.Id)">delete</i>
+            <i class="material-icons editExample" (click)="editExamples(example.Id, example.Title, example.BodyHtml, example.BodyMarkdown)">edit</i>
           </mat-expansion-panel>
         </mat-accordion>
         <button mat-raised-button class="addExample" color="warn" (click)="showExampleFormDialog()"><i
           class="material-icons">add</i></button>
       </mat-tab>
-
     <mat-tab label="History" (selectedTabChange)="getHistory($event)">
       <div *ngIf="topicHistories else loading"><pre class="topicHistories">{{ topicHistories }}</pre></div>
     </mat-tab>
