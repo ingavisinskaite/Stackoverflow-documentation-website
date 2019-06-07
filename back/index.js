@@ -70,20 +70,35 @@ app.get('/Topics', (req, res) => {
     const rowsToShow = Number(urlParams.take);
     const orderBy = urlParams.orderBy;
     const direction = urlParams.direction;
-    const filterBy = urlParams.filter;
+    const filterBy = urlParams.filterBy;
+    console.log(filterBy);
+    if (!filterBy) {
+        con.query("SELECT Title, CreationDate, ViewCount, Id FROM topics WHERE DocTagId = " + id +
+        " ORDER BY " + orderBy + " " + direction + " " +
+        " LIMIT " + rowToStartFrom + ", " + rowsToShow,
+        function (err, result, fields) {
+          if (err) throw err;
 
-    con.query("SELECT Title, CreationDate, ViewCount, Id FROM topics WHERE DocTagId = " + id + " " +
-      "ORDER BY " + orderBy + " " + direction + " " +
-      "LIMIT " + rowToStartFrom + ", " + rowsToShow,
-      function (err, result, fields) {
-        if (err) throw err;
+          res.json(result);
+        });
 
-        res.json(
-          result
-        );
-      });
+      con.end();
+    }
+    else {
+        con.query("SELECT Title, CreationDate, ViewCount, Id FROM topics WHERE DocTagId = " + id +
+        " AND Title LIKE '%" + filterBy + "%'",
+        " ORDER BY " + orderBy + " " + direction + " " +
+        " LIMIT " + rowToStartFrom + ", " + rowsToShow,
+        function (err, result, fields) {
+          if (err) throw err;
 
-    con.end();
+          res.json(
+            result
+          );
+        });
+
+      con.end();
+    }
   });
 });
 

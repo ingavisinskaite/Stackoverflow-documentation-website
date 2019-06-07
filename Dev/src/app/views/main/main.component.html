@@ -38,10 +38,15 @@
     </div>
     
     <!--DO WE NEED FILTERING HERE?-->
-    <!-- <mat-form-field class="filter-form" *ngIf="selectedDoctagId" fxFlex>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field> -->
-    
+    <mat-form-field class="filter-form" *ngIf="selectedDoctagId" fxFlex>
+      <input matInput [(ngModel)]="filtering" (ngModelChange)="applyFilter($event)" placeholder="Search examples here !">
+    </mat-form-field>
+    <!-- 
+    [()] - 2 way data binding (siuncia ir gauna duomenys) 
+    () - tiktai siuncia info
+    [] - tiktai gauna info 
+    ngmodechange neveikia be ngmodel
+    -->
     <div class="table-wrap" fxLayout="column" fxLayoutAlign=" stretch" fxFlex>
       
       <table mat-table [dataSource]="topics" matSort matSortActive="Title" matSortDirection="asc" matSortDisableClear
