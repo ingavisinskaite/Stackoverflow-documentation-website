@@ -1,3 +1,7 @@
 export const lt = {
-    hero: 'Sveiki atvykę į administravimo panelę!'
-};
+    hello: 'Labas',
+    search: 'Ieskoti temos',
+    addDoctag: 'Prideti Doctag',
+    addTopic: 'Prideti Tema',
+    selectedDoctagTitle: 'Pavadinimas'
+}

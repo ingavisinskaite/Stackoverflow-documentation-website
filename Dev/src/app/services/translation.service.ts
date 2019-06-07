@@ -1,43 +1,37 @@
+
 import { Injectable } from '@angular/core';
-import { en } from '../../assets/locale/en';
-import { lt } from '../../assets/locale/lt';
+import { en, lt } from '../../assets/locale';
+
 
 @Injectable({
-  providedIn: 'root'
-})
+    providedIn: 'root'
+  })
+  export class TranslationService {
 
-export class TranslationService {
+    lans = ['LT', 'EN'];
+    selectedLang = 'LT';
 
+    constructor() {}
 
-  constructor() {
-    this.setDefaultLang();
-  }
-
-  private setDefaultLang() {
-    if (!this.getLocalStrg()) {
-      this.setLocalStrg('EN');
+    public get lang(): any {
+        if (this.selectedLang === 'LT') {
+            return lt;
+        } else {
+            return en;
+        }
     }
-  }
 
-  public setLocalStrg(lang: string): void { // irasiau info i local storage
-    return localStorage.setItem('kalba', lang); // 'kalba' - matomas browseryje
-  }
-
-  private getLocalStrg(): string { // metodas pasiimti info is local storage
-    return localStorage.getItem('kalba');
-  }
-
-  public getSelectedLang(): any {
-    return this.getLang(this.getLocalStrg());
-  }
-
-  private getLang(lang: string): any {
-    if (lang === 'LT') {
-      return lt;
-    } else {
-      return en;
+    public set lang(lang: any) {
+        this.selectedLang = lang;
+        localStorage.setItem('codeBakers_lang', lang);
     }
+
+    public getLocalStorageLang(): string {
+        if (localStorage.getItem('codeBakers_lang') === 'LT' || localStorage.getItem('codeBakers_lang') === 'EN') {
+            this.selectedLang = localStorage.getItem('codeBakers_lang');
+            return this.selectedLang;
+        }
+        return '';
+    }
+
   }
-
-
-}

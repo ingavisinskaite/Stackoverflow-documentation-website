@@ -1,5 +1,3 @@
-import { TranslationService } from './services/translation.service';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +23,7 @@ import {
 
 import { DeletedComponent,
          AddedComponent } from './snackBars';
-import { FormatDatePipe } from './pipes';
+import { FormatDatePipe, TranslatePipe } from './pipes';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -50,6 +48,7 @@ import {
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { EditedComponent } from './snackBars/edited/edited.component';
+import { TranslationService } from './services';
 
 
 @NgModule({
@@ -70,7 +69,8 @@ import { EditedComponent } from './snackBars/edited/edited.component';
     AddedComponent,
     FormatDatePipe,
     EditExampleDialogComponent,
-    EditedComponent
+    EditedComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,

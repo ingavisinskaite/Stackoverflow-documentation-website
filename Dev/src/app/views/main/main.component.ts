@@ -10,15 +10,15 @@ import {
   ContributorDeletionReasons,
   Contributors
 } from '../../models';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
+import { PageEvent, MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/material';
 import { AppDataService } from '../../services/app-data.service';
 import { DoctagDialogComponent, TopicDialogComponent, DoctagVersionsDialogComponent, DeleteTopicDialogComponent } from '../../dialogs';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import {Title} from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main',
@@ -201,7 +201,7 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
             .subscribe(data => {
             console.log('Inserted topic:');
             console.log(data);
-            // 
+            //
           });
         }
       });
@@ -221,6 +221,10 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
     const partTwo = Number(partOne.split('-')[0]);
     const dateObj = new Date(partTwo);
     return dateObj;
+  }
+
+  changeLang(lang: string) {
+    this._trans.lang = lang;
   }
 
 }

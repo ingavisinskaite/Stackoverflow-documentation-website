@@ -1,3 +1,7 @@
 export const en = {
-    hero: 'Welcome to DUMP Admin Panel!'
-};
+    hello: 'Hi',
+    search: 'Search for topics',
+    addDoctag: 'Add Doctag',
+    addTopic: 'Add Topic',
+    selectedDoctagTitle: 'Title'
+}
