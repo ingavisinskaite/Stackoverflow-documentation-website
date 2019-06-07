@@ -6,7 +6,7 @@
 
     <h1 class="topicTitle" id="top">{{topicTitle}}</h1>
     <mat-tab-group mat-stretch-tabs (selectedTabChange)="getHistory($event)">
-      <mat-tab label="Examples">
+      <mat-tab label="{{ 'examples' | translate }}">
         <mat-accordion *ngFor="let example of examples">
           <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="example.Id == firstExampleId"
             (closed)="panelOpenState = false">
@@ -25,7 +25,7 @@
           class="material-icons">add</i></button>
       </mat-tab>
 
-    <mat-tab label="History" (selectedTabChange)="getHistory($event)">
+    <mat-tab label="{{ 'history' | translate }}" (selectedTabChange)="getHistory($event)">
       <div *ngIf="topicHistories else loading"><pre class="topicHistories">{{ topicHistories }}</pre></div>
     </mat-tab>
   </mat-tab-group>

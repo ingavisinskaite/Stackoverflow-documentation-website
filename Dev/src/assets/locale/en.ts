@@ -3,5 +3,7 @@ export const en = {
     search: 'Search for topics',
     addDoctag: 'Add Doctag',
     addTopic: 'Add Topic',
-    selectedDoctagTitle: 'Title'
+    selectedDoctagTitle: 'Title',
+    examples: 'Examples',
+    history: 'History'
 }

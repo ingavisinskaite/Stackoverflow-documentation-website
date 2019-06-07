@@ -48,6 +48,7 @@ import {
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { TranslationService } from './services';
+import { DeleteDirective } from './directives/delete.directive';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { TranslationService } from './services';
     DeletedComponent,
     AddedComponent,
     FormatDatePipe,
-    TranslatePipe
+    TranslatePipe,
+    DeleteDirective
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,9 @@
 export const lt = {
     hello: 'Labas',
-    search: 'Ieskoti temos',
-    addDoctag: 'Prideti Doctag',
-    addTopic: 'Prideti Tema',
-    selectedDoctagTitle: 'Pavadinimas'
+    search: 'Ieškoti temos',
+    addDoctag: 'Pridėti Doctag',
+    addTopic: 'Pridėti Temą',
+    selectedDoctagTitle: 'Pavadinimas',
+    examples: 'Pavyzdžiai',
+    history: 'Istorija'
 }
