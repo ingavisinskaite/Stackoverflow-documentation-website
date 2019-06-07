@@ -1,8 +1,8 @@
 <div fxLayout="column" fxLayoutAlign="space-around center">
 
   <div class="langs">
-    <button class="langEn" mat-raised-button (click)="changeLang('EN')">EN</button>
-    <button class="langLt" mat-raised-button (click)="changeLang('LT')">LT</button>
+    <button class="langEn" mat-stroked-button (click)="changeLang('EN')">EN</button>
+    <button class="langLt" mat-stroked-button (click)="changeLang('LT')">LT</button>
   </div>
 
   <div class="search-bar-wraper" fxLayout="row" fxLayoutAlign="center center" fxFlex>
@@ -44,10 +44,9 @@
       </div> -->
   </div>
 
-  <!--DO WE NEED FILTERING HERE?-->
-  <!-- <mat-form-field class="filter-form" *ngIf="selectedDoctagId" fxFlex>
+  <mat-form-field class="filter-form" *ngIf="selectedDoctagId" fxFlex>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field> -->
+  </mat-form-field>
 
   <div class="table-wrap" fxLayout="column" fxLayoutAlign=" stretch" fxFlex>
 
