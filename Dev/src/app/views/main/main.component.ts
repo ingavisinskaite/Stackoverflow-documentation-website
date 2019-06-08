@@ -39,6 +39,8 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
   docTagVersions: Array<DocTagVersions>;
   topicHistoryTypes: Array<TopicHistoryTypes>;
   topicHistories: Array<TopicHistories>;
+  filtering: string;
+  filterBy = '';
 
   selectedDoctagId: number;
   selectedDoctagTitle: string = null;
@@ -49,7 +51,7 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
   topicsOrderBy = 'Title';
   topicsSortDirection = 'ASC';
 
-  topicsDataSource: MatTableDataSource<Topics[]>;
+  // topicsDataSource: MatTableDataSource<Topics[]>;
   displayedColumns: string[] = ['Title', 'CreationDate', 'ViewCount', 'Actions'];
 
   myControl = new FormControl();
@@ -58,6 +60,8 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
   color = 'primary';
   mode = 'indeterminate';
   value = 50;
+
+  str = 'hello world';
   // dependencies motodos naudojam savo klaseje
   constructor(private _router: Router,
               private _appDataService: AppDataService,
@@ -72,6 +76,17 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
+    // const arr = this.str.split(' ');
+    // // tslint:disable-next-line:one-variable-per-declaration
+    // let asci, f, l, endWord, res;
+    // for (const word of arr) {
+    //   word.split('');
+    //   f = word[word.length - 1];
+    //   l = word[1];
+    //   asci = word[0].charCodeAt(0);
+    //   endWord = asci + f + word.substring(2, word.length - 1) + l;
+    // }
+
     this._appDataService.getDoctags()
       .then(data => {
         this.docTags = data;
@@ -85,8 +100,10 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
           this._appDataService.getTopicsCount(doctagId).then(data => {
             this.topicsListLength = data[0].Count;
           });
-          this._appDataService.getTopics(doctagId, 0, this.topicsPageSize, this.topicsOrderBy, this.topicsSortDirection).then(topics => {
+          // tslint:disable-next-line:max-line-length
+          this._appDataService.getTopics(doctagId, 0, this.topicsPageSize, this.topicsOrderBy, this.topicsSortDirection, this.filterBy).then(topics => {
             this.topics = topics;
+            // this.topicsDataSource = this.topics;
           });
         }
       })
@@ -105,7 +122,8 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
       console.log(sortData);
       this.topicsOrderBy = sortData.active;
       this.topicsSortDirection = sortData.direction;
-      this._appDataService.getTopics(this.selectedDoctagId, 0, this.topicsPageSize, this.topicsOrderBy, this.topicsSortDirection)
+      // tslint:disable-next-line:max-line-length
+      this._appDataService.getTopics(this.selectedDoctagId, 0, this.topicsPageSize, this.topicsOrderBy, this.topicsSortDirection, this.filterBy)
         .then(data => {
           this.topicsPageIndex = 0;
           this.topics = data;
@@ -122,15 +140,21 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
     return data.filter(option => option.Title.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  private applyFilter(filterBy: string) {
-    this.topicsDataSource.filter = filterBy.trim().toLowerCase();
+  public applyFilter(filterStr: string) {
+    this.filterBy = filterStr;
+    this.ngOnInit();
+    console.log(this.filterBy);
+
+    // this.allTopics.filter = filterBy.trim().toLowerCase();
   }
 
   public async onTopicsPageChange(event?: PageEvent): Promise<void> {
     const from = event.pageSize * event.pageIndex;
     this.topicsPageIndex = event.pageIndex;
-    return this._appDataService.getTopics(this.selectedDoctagId, from, event.pageSize, this.topicsOrderBy, this.topicsSortDirection)
+    // tslint:disable-next-line:max-line-length
+    return this._appDataService.getTopics(this.selectedDoctagId, from, event.pageSize, this.topicsOrderBy, this.topicsSortDirection, this.filterBy)
       .then(data => {
+
         this.topics = data;
       });
   }
@@ -146,7 +170,7 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
       this.topicsListLength = data[0].Count;
     });
 
-    this._appDataService.getTopics(docTagId, 0, this.topicsPageSize, this.topicsOrderBy, this.topicsSortDirection)
+    this._appDataService.getTopics(docTagId, 0, this.topicsPageSize, this.topicsOrderBy, this.topicsSortDirection, this.filterBy)
       .then(data => {
         this.topicsPageIndex = 0;
         this.topics = data;

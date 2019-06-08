@@ -43,10 +43,17 @@ export class AppDataService {
     return this._http.get<Topics>(url);
   }
 
-  public getTopics(id: string | number, topicsFrom: number, topicsTo: number, orderBy: string, direction: string): Promise<Array<Topics>> {
-    const url = 'http://localhost:1337/Topics?id=' + id + '&skip=' + topicsFrom +
-    '&take=' + topicsTo + '&orderBy=' + orderBy + '&direction=' + direction;
-    return this._http.get<Array<Topics>>(url).toPromise();
+  // tslint:disable-next-line:max-line-length
+  public getTopics(id: string | number, topicsFrom: number, topicsTo: number, orderBy: string, direction: string, filterBy: string): Promise<Array<Topics>> {
+    if (filterBy !== '') {
+      const url = 'http://localhost:1337/Topics?id=' + id + '&skip=' + topicsFrom +
+      '&take=' + topicsTo + '&orderBy=' + orderBy + '&direction=' + direction + '&filterBy=' + filterBy;
+      return this._http.get<Array<Topics>>(url).toPromise();
+    } else {
+      const url = 'http://localhost:1337/Topics?id=' + id + '&skip=' + topicsFrom +
+      '&take=' + topicsTo + '&orderBy=' + orderBy + '&direction=' + direction;
+      return this._http.get<Array<Topics>>(url).toPromise();
+    }
   }
 
   public getExamples(id: number): Promise<Array<Examples>> {
