@@ -72,20 +72,15 @@
       <ng-container matColumnDef="Actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let element">
-          <!-- <button mat-raised-button color="primary"(click)="navigateToTopic(element.Id)">View</button> -->
           <i class="material-icons" (click)="navigateToTopic(element.Id)">visibility</i>
-          <!-- <button mat-raised-button color="warn">Edit</button> -->
           <i class="material-icons">edit</i>
-          <!-- <button mat-raised-button color=""(click)="confirmTopicDelete()">Delete</button> -->
-          <i class="material-icons" appDelete (holdTime)="holdHandler($event, element.Id)">delete</i>
-          <svg viewBox="0 0 36 36" class="circular-chart">
-              <path class="circle"
-                stroke-dasharray="60, 100"
-                d="M18 2.0845
-                  a 15.9155 15.9155 0 0 1 0 31.831
-                  a 15.9155 15.9155 0 0 1 0 -31.831"
-              />
+          <div class="spinner mr-1" appDelete (holdTime)="holdHandler($event, element.Id)">
+            <svg class="progress" width="35" height="35" viewBox="0 0 30 30">
+              <circle cx="15" cy="15" r="13" fill="none" stroke-width=".75" />
+              <circle class="progress_value" cx="15" cy="15" r="13" fill="none" stroke="#f44336" stroke-width="3" />
             </svg>
+            <i class="material-icons">delete</i>
+          </div>
         </td>
       </ng-container>
 

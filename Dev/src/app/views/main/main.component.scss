@@ -120,23 +120,41 @@ tr {
     float: right;
 }
 
-.circular-chart {
-    display: block;
-    margin: 10px auto;
-    max-width: 80%;
-    max-height: 250px;
+.spinner {
+    width: 35px;
+    height: 35px;
+    position:relative;
+    cursor: pointer;
+    z-index: 2;
   }
-  
-  .circle {
-    stroke: #4CC790;
-    fill: none;
-    stroke-width: 2.8;
-    stroke-linecap: round;
-    animation: progress 1s ease-out forwards;
+
+  .spinner > .material-icons {
+    position: absolute;
+    left: 6px;
+    top: 5px;
+    color: #00303d;
+    z-index: -1;
   }
-  
+
+  .progress {
+    transform: rotate(-90deg);
+  }
+
+  .progress_value {
+    stroke-dasharray: 339.292;
+    stroke-dashoffset: 339.292;
+  }
+
+  .spinner :active> .progress_value
+  {
+      animation: progress 5.8s ease-out;
+  }
+
   @keyframes progress {
     0% {
-      stroke-dasharray: 0 100;
+      stroke-dashoffset: 339.292;
     }
-  }
+    100% {
+      stroke-dashoffset: 0;
+    }
+}

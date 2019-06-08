@@ -239,7 +239,7 @@ export class MainComponent implements AfterViewInit, OnInit { // implements - pa
 
   holdHandler(e: number, topicId: number) {
     console.log(e);
-    if (e > 3000) {
+    if (e >= 800) {
       this.deleteTopic(topicId);
       this.openSnackBar();
     } else {
