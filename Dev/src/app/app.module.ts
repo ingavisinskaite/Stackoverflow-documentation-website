@@ -1,4 +1,3 @@
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +18,8 @@ import {
         DoctagDialogComponent,
         DoctagVersionsDialogComponent,
         DeleteTopicDialogComponent,
-        DeleteExampleDialogComponent} from './dialogs';
+        DeleteExampleDialogComponent,
+        EditExampleDialogComponent } from './dialogs';
 
 import { DeletedComponent,
          AddedComponent } from './snackBars';
@@ -47,6 +47,7 @@ import {
 
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEventModule } from 'ngx-scroll-event';
+import { EditedComponent } from './snackBars/edited/edited.component';
 import { TranslationService } from './services';
 import { DeleteDirective } from './directives/delete.directive';
 
@@ -69,7 +70,10 @@ import { DeleteDirective } from './directives/delete.directive';
     AddedComponent,
     FormatDatePipe,
     TranslatePipe,
-    DeleteDirective
+    DeleteDirective,
+    EditExampleDialogComponent,
+    EditedComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,
@@ -105,6 +109,8 @@ import { DeleteDirective } from './directives/delete.directive';
                     DeleteTopicDialogComponent,
                     DeleteExampleDialogComponent,
                     DeletedComponent,
-                    AddedComponent]
+                    EditExampleDialogComponent,
+                    AddedComponent,
+                    EditedComponent]
 })
 export class AppModule { }

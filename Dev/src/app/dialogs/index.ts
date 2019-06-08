@@ -1,3 +1,4 @@
+import { EditExampleDialogComponent } from './edit-example-dialog/edit-example-dialog.component';
 import { DeleteExampleDialogComponent } from './delete-example-dialog/delete-example-dialog.component';
 import { DeleteTopicDialogComponent } from './delete-topic-dialog/delete-topic-dialog.component';
 import { DoctagVersionsDialogComponent } from './doctagversions-dialog/doctagversions-dialog.component';
@@ -11,5 +12,6 @@ export {
     ExamplesDialogComponent,
     DoctagVersionsDialogComponent,
     DeleteTopicDialogComponent,
-    DeleteExampleDialogComponent
+    DeleteExampleDialogComponent,
+    EditExampleDialogComponent
 };

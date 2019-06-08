@@ -25,6 +25,7 @@
             </svg>
             <i class="material-icons">delete</i>
           </div>
+          <i class="material-icons editExample" (click)="editExamples(example.Id, example.Title, example.BodyHtml, example.BodyMarkdown)">edit</i>
         </mat-expansion-panel>
       </mat-accordion>
       <button mat-raised-button class="addExample" color="warn" (click)="showExampleFormDialog()"><i

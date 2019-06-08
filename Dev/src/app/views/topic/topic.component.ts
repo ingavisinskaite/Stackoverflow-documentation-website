@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Examples } from '../../models';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { ExamplesDialogComponent } from '../../dialogs';
+import { ExamplesDialogComponent, EditExampleDialogComponent } from '../../dialogs';
 import { Injectable } from '@angular/core';
 import { ScrollToService, ScrollToConfigOptions } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEvent } from 'ngx-scroll-event';
@@ -119,6 +119,23 @@ export class TopicComponent implements OnInit {
         console.log('Deleted example' + data);
       });
   }
+
+  public editExamples(exampleId: number, exampleTitle: string, exampleBody: string, exampleMarkdown: string): void {
+    const dialogRef = this._dialog.open(EditExampleDialogComponent,
+      { data: { exampleId, exampleTitle, exampleBody, exampleMarkdown } });
+
+    console.log(exampleId);
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        if (!result) { return; } else {
+          this._appDataService.editExample(exampleId, result).subscribe(data => {
+            console.log('Example edited:');
+            console.log(data);
+          });
+        }
+      });
+}
+
 
   openSnackBar() {
     this._snackBar.openFromComponent(DeletedComponent, {

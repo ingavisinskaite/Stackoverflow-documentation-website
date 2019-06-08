@@ -1,3 +1,4 @@
+import { EditExampleData } from './EditExampleData';
 import { ExampleDialogData } from './exampleDialogData.model';
 import { TopicDialogData } from './topicDialogData';
 import { ExamplesData } from './examplesData.model';
@@ -26,5 +27,6 @@ export {
     TopicsData,
     ExamplesData,
     TopicDialogData,
-    ExampleDialogData
+    ExampleDialogData,
+    EditExampleData
 };

@@ -25,13 +25,11 @@ export class DeleteExampleDialogComponent implements OnInit {
   public deleteExample(id: number): void {
     this._appDataService.deleteExample(id)
       .then(data => {
-        console.log('Deleted example' + data);
+        console.log('Deleted topic:' + data);
       });
-    this.closeExampleDeleteDialog();
-    this.openSnackBar();
   }
 
-  public closeExampleDeleteDialog(): void {
+  public closeExampleDeleteDialog(): void { //ideti po funkcija this.closeExampleBla bla
     this.dialogRef.close();
   }
 
