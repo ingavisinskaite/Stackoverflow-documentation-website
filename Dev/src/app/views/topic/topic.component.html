@@ -4,29 +4,37 @@
 
 <div class="container" *ngIf="examples else loading" detect-scroll (onScroll)="handleScroll($event)">
 
-    <h1 class="topicTitle" id="top">{{topicTitle}}</h1>
-    <mat-tab-group mat-stretch-tabs (selectedTabChange)="getHistory($event)">
-      <mat-tab label="{{ 'examples' | translate }}">
-        <mat-accordion *ngFor="let example of examples">
-          <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="example.Id == firstExampleId"
-            (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{ example.Title }}
-              </mat-panel-title>
-              <mat-panel-description>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div [innerHTML]="example.BodyHtml"></div>
-            <i class="material-icons deleteExample" (click)="confirmExampleDelete(example.Id)">delete</i> 
-          </mat-expansion-panel>
-        </mat-accordion>
-        <button mat-raised-button class="addExample" color="warn" (click)="showExampleFormDialog()"><i
+  <h1 class="topicTitle" id="top">{{topicTitle}}</h1>
+  <mat-tab-group mat-stretch-tabs (selectedTabChange)="getHistory($event)">
+    <mat-tab label="{{ 'examples' | translate }}">
+      <mat-accordion *ngFor="let example of examples">
+        <mat-expansion-panel (opened)="panelOpenState = true" [expanded]="example.Id == firstExampleId"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ example.Title }}
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div [innerHTML]="example.BodyHtml"></div>
+          <div class="spinner mr-1" appDelete (holdTime)="holdHandler($event, example.Id)">
+            <svg class="progress" width="35" height="35" viewBox="0 0 30 30">
+              <circle cx="15" cy="15" r="13" fill="none" stroke-width=".75" />
+              <circle class="progress_value" cx="15" cy="15" r="13" fill="none" stroke="#f44336" stroke-width="3" />
+            </svg>
+            <i class="material-icons">delete</i>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <button mat-raised-button class="addExample" color="warn" (click)="showExampleFormDialog()"><i
           class="material-icons">add</i></button>
-      </mat-tab>
+    </mat-tab>
 
     <mat-tab label="{{ 'history' | translate }}" (selectedTabChange)="getHistory($event)">
-      <div *ngIf="topicHistories else loading"><pre class="topicHistories">{{ topicHistories }}</pre></div>
+      <div *ngIf="topicHistories else loading">
+        <pre class="topicHistories">{{ topicHistories }}</pre>
+      </div>
     </mat-tab>
   </mat-tab-group>
 

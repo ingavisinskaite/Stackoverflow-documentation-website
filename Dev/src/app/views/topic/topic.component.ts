@@ -1,10 +1,12 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeletedComponent } from './../../snackBars';
 import { AppDataService } from '../../services/app-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Examples } from '../../models';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { ExamplesDialogComponent, DeleteExampleDialogComponent } from '../../dialogs';
+import { ExamplesDialogComponent } from '../../dialogs';
 import { Injectable } from '@angular/core';
 import { ScrollToService, ScrollToConfigOptions } from '@nicky-lenaers/ngx-scroll-to';
 import { ScrollEvent } from 'ngx-scroll-event';
@@ -33,7 +35,8 @@ export class TopicComponent implements OnInit {
   constructor(private _activatedRoute: ActivatedRoute, // angular service
     private _appDataService: AppDataService,
     private _dialog: MatDialog, // service to opne material design
-    private _scrollToService: ScrollToService) {
+    private _scrollToService: ScrollToService,
+    private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -110,8 +113,26 @@ export class TopicComponent implements OnInit {
     this.showTopicHistories(this.topicId);
   }
 
-  confirmExampleDelete(exampleId: number): void {
-    this._dialog.open(DeleteExampleDialogComponent, {data: {exampleId}});
+  public deleteExample(id: number): void {
+    this._appDataService.deleteExample(id)
+      .then(data => {
+        console.log('Deleted example' + data);
+      });
   }
 
+  openSnackBar() {
+    this._snackBar.openFromComponent(DeletedComponent, {
+      duration: 3000
+    });
+  }
+
+  holdHandler(e: number, exampleId: number) {
+    console.log(e);
+    if (e >= 800) {
+      this.deleteExample(exampleId);
+      this.openSnackBar();
+    } else {
+      return;
+    }
+  }
 }
